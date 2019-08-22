@@ -13,6 +13,7 @@ import modelo.Planta;
 import modelo.StockInsumo;
 
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -21,9 +22,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class PanelPlantaAuxAgregar extends JPanel {
 	private JTextField txtId;
@@ -44,7 +49,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		
 		
 		setLayout(null);
-		setBounds(100, 100, 700, 400);
+		setSize(770, 540);
 		
 		inicializar(listaInsumos);
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
@@ -84,6 +89,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		add(lblAcopio);
 		
 		txtId = new JTextField();
+		txtId.setBackground(Color.WHITE);
 		txtId.setBounds(89, 47, 214, 20);
 		add(txtId);
 		txtId.setColumns(10);
@@ -189,6 +195,11 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		textInicial.setBounds(220, 308, 120, 20);
 		add(textInicial);
 		textInicial.setColumns(10);
+		
+		JLabel lblAgregarPlanta = new JLabel("Agregar Planta");
+		lblAgregarPlanta.setForeground(Color.BLUE);
+		lblAgregarPlanta.setBounds(670, 515, 100, 15);
+		add(lblAgregarPlanta);
 		setVisible(true);
 
 	}
@@ -219,6 +230,15 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		return modeloAux;
 	}
 	
+	
+	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 	

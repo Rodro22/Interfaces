@@ -8,10 +8,9 @@ import java.awt.Graphics2D;
 
 public class Circulo {
 	private int x, y;
-	public static final int d = 30;
+	public static final int d = 20;
 	private String nombre;
-	
-	public int id;
+	public int idInsumo;
 	
 	public String getNombreCirculo() {
 		return nombre;
@@ -31,15 +30,16 @@ public class Circulo {
 		this.y = y;
 		this.nombre = nombre;
 	}
-	public Circulo(int x, int y, String nombre, int d) {
+	public Circulo(int x, int y, String nombre, int insumo) {
 		this.x = x;
 		this.y = y;
 		this.nombre = nombre;
-		this.id = d;
+		this.idInsumo = insumo;
 	}
 	public Circulo(String nombre) {
 		
 		this.nombre = nombre;
+		this.idInsumo = 0;
 		
 	}
 	
@@ -51,24 +51,68 @@ public class Circulo {
 //    g.drawString(otroTexto, 100, 70);
 	
 	public void pintar(Graphics g) {
-		g.setColor(Color.blue);
+		g.setColor(Color.green);
 		((Graphics2D) g).setStroke(new BasicStroke(3));
 
 		g.drawOval(this.x - d/2, this.y -d/2, d, d);
 		g.fillOval(this.x - d/2, this.y -d/2, d, d);
 //		Font oldFont = getFont();
-	    Font fuente=new Font("Monospaced", Font.BOLD, 36);
+	    Font fuente = new Font("Monospaced", Font.BOLD, 20);
 	    g.setFont(fuente);
-		g.drawString(nombre, x, y);
+		g.drawString(nombre, x-35, y-20);
 
 	}
 
 	public void pintar2(Graphics g) {
-		((Graphics2D)g).setColor(Color.orange);
-		((Graphics2D)g).setStroke(new BasicStroke(3));
+		g.setColor(Color.red);
+		((Graphics2D) g).setStroke(new BasicStroke(3));
+
 		g.drawOval(this.x - d/2, this.y -d/2, d, d);
-		g.drawString(nombre, x, y);
+		g.fillOval(this.x - d/2, this.y -d/2, d, d);
+//		Font oldFont = getFont();
+	    Font fuente = new Font("Monospaced", Font.BOLD, 20);
+	    g.setFont(fuente);
+		g.drawString(nombre, x-35, y-20);
+		
+		
 	}
+	
+	public void pintar3(Graphics g) {
+		g.setColor(Color.red);
+		((Graphics2D) g).setStroke(new BasicStroke(3));
+
+		g.drawOval(this.x - d/2, this.y -d/2, d, d);
+		g.fillOval(this.x - d/2, this.y -d/2, d, d);
+//		Font oldFont = getFont();
+	    Font fuente = new Font("Monospaced", Font.BOLD, 20);
+	    g.setFont(fuente);
+		g.drawString(nombre, x-35, y-20);
+
+	}
+	
+//	public void pintarInsumo(Graphics g) {
+//		
+//		if(idInsumo == 0) {
+//			g.setColor(Color.green);
+//			((Graphics2D) g).setStroke(new BasicStroke(3));
+//			g.drawOval(this.x - d/2, this.y -d/2, d, d);
+//			g.fillOval(this.x - d/2, this.y -d/2, d, d);
+//			g.drawString(nombre, x-35, y-20);
+//			}
+//		
+//		else if(idInsumo != 0) {
+//			g.setColor(Color.red);
+//			((Graphics2D) g).setStroke(new BasicStroke(3));
+//			g.drawOval(this.x - d/2, this.y -d/2, d, d);
+//			g.fillOval(this.x - d/2, this.y -d/2, d, d);
+//			g.drawString(nombre, x-35, y-20);
+//			}
+//		
+//	}
+	
+	
+	
+	
 	
 	public int getX() {
 		return x;

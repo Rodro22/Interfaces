@@ -17,11 +17,15 @@ import javax.swing.JTable;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PanelPlantaGestion extends JPanel {
 	private JTable table;
@@ -31,8 +35,8 @@ public class PanelPlantaGestion extends JPanel {
 
 	public PanelPlantaGestion(List<Planta> listaPlantas, JFrame frame, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos) {
 		setLayout(null);
-		
-		inicializar(listaPlantas);
+		setSize(770, 540);
+		inicializarPlantas(listaPlantas);
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
@@ -46,10 +50,6 @@ public class PanelPlantaGestion extends JPanel {
 		modeloAux.setValueAt(getC.unStock.lista_insumo, i, 3);
 		modeloAux.setValueAt(i, i, 4);
 		}
-		
-		
-		
-		
 		
 		JLabel lblListaDePlantas = new JLabel("Lista de plantas:");
 		lblListaDePlantas.setBounds(24, 11, 100, 14);
@@ -115,19 +115,24 @@ public class PanelPlantaGestion extends JPanel {
 		
 		btnBorrar.setBounds(314, 288, 89, 23);
 		add(btnBorrar);
+		
+		JLabel lblGestionPlantas = new JLabel("Gestion Plantas");
+		lblGestionPlantas.setForeground(Color.BLUE);
+		lblGestionPlantas.setBounds(670, 515, 100, 15);
+		add(lblGestionPlantas);
 
 	}
 
-	public void inicializar(List<Planta> listaPlantas) {
+	public void inicializarPlantas(List<Planta> listaPlantas) {
 
-		table = new JTable(mostrarElementos2(listaPlantas));
+		table = new JTable(mostrarElementosPlantas(listaPlantas));
 		table.setBounds(24, 36, 629, 227);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(24, 36, 629, 227);
 		add(scrollPane);
 		
 	}
-	public DefaultTableModel mostrarElementos2(List<Planta> listaPlantas) {
+	public DefaultTableModel mostrarElementosPlantas(List<Planta> listaPlantas) {
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
@@ -145,15 +150,19 @@ public class PanelPlantaGestion extends JPanel {
 		}
 		return modeloAux;
 	}
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 }

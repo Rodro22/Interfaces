@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +18,13 @@ import modelo.Camion;
 import modelo.Insumo;
 import modelo.Planta;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import java.awt.Color;
 
 public class PanelCaminoGestion extends JPanel {
 	public List<Camino> listaCaminos_principal;
@@ -43,6 +47,7 @@ public class PanelCaminoGestion extends JPanel {
 		this.listaCaminos_principal = listaCaminos;
 		this.listaPlantas_principal = listaPlantas;
 		setLayout(null);
+		setSize(770, 540);
 		inicializar(listaCaminos);
 		
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
@@ -185,6 +190,11 @@ public class PanelCaminoGestion extends JPanel {
 		});
 		btnBorrar.setBounds(430, 103, 89, 23);
 		add(btnBorrar);
+		
+		JLabel lblGestionCamino = new JLabel("Gestion Caminos");
+		lblGestionCamino.setForeground(Color.BLUE);
+		lblGestionCamino.setBounds(670, 515, 100, 15);
+		add(lblGestionCamino);
 
 	}
 	public void inicializar(List<Camino> listaCaminos) {
@@ -285,7 +295,13 @@ public class PanelCaminoGestion extends JPanel {
 			modeloAux.setValueAt(i, i, 6);
 		}
 		return modeloAux;}
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 
 		
 	}

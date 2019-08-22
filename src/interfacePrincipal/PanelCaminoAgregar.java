@@ -1,9 +1,12 @@
 package interfacePrincipal;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -19,6 +22,7 @@ import modelo.Insumo;
 import modelo.Planta;
 
 import javax.swing.JList;
+import java.awt.Color;
 
 public class PanelCaminoAgregar extends JPanel {
 
@@ -41,6 +45,7 @@ public class PanelCaminoAgregar extends JPanel {
 	public PanelCaminoAgregar(List<Camino> listaCaminos, List<Planta> listaPlantas) {
 		this.listaCaminos_principal = listaCaminos;
 		setLayout(null);
+		setSize(770, 540);
 		this.listaCaminos_principal = listaCaminos;
 		this.listaPlantas_principal = listaPlantas;
 		
@@ -192,6 +197,11 @@ public class PanelCaminoAgregar extends JPanel {
 		table_1.setBounds(32, 280, 640, 81);
 		add(table_1);
 		
+		JLabel lblAgregarCamino = new JLabel("Agregar Camino");
+		lblAgregarCamino.setForeground(Color.BLUE);
+		lblAgregarCamino.setBounds(670, 515, 100, 15);
+		add(lblAgregarCamino);
+		
 		
 		
 		
@@ -229,7 +239,13 @@ public class PanelCaminoAgregar extends JPanel {
 		return modeloAux;
 	}
 	
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 	

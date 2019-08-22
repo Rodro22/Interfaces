@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-public class Lienzo extends JPanel implements MouseListener, MouseMotionListener {
+public class LienzoAux extends JPanel implements MouseListener, MouseMotionListener {
 	
 	private Vector<Circulo> vectorCirculos;
 	private Vector<Flecha> vectorFlechas;
@@ -20,7 +20,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 	private int iCirculo;
 	
 	
-	public Lienzo() {
+	public LienzoAux() {
 		this.vectorCirculos = new Vector<>();
 		this.vectorFlechas = new Vector<>();
 		this.addMouseListener(this);
@@ -30,13 +30,13 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 	//
 	//
 	//Con este metodo puedo inicializar la ventana con Circulos ya creados
-	public Lienzo(Vector<Circulo> listaCirculos) {
+	public LienzoAux(Vector<Circulo> listaCirculos) {
 		this.vectorCirculos = new Vector<>();
 		vectorCirculos = listaCirculos;
 	}
 	
 	//Con este metodo inicializo el grafo completo
-	public Lienzo(Vector<Circulo> listaCirculos, Vector<Flecha> listaFlechas) {
+	public LienzoAux(Vector<Circulo> listaCirculos, Vector<Flecha> listaFlechas) {
 		this.vectorCirculos = new Vector<>();
 		vectorCirculos = listaCirculos;
 		this.vectorFlechas = new Vector<>();
@@ -52,10 +52,19 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 		//refresca de manera optima cada vez que pintamos en nuestro lienzo
 		super.paint(g);
 		for(Circulo Circulos : vectorCirculos) {
+			
+			if(Circulos.idInsumo == 0) { 
 					Circulos.pintar(g);
-
-				for(Flecha Flecha : vectorFlechas) {
-					Flecha.pintar(g);		
+				}
+			else if ((Circulos.idInsumo == 1)){
+					Circulos.pintar2(g);
+			}
+			for(Flecha Flecha : vectorFlechas) {
+				if(Flecha.valorGuia == 0) {
+				Flecha.pintar(g);		
+				}else if (Flecha.valorGuia == 1) {
+					Flecha.pintar2(g);
+				}
 			}
 		}
 									
@@ -99,7 +108,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-//		 Devolvemos todo a sus valores iniciales
+		// Devolvemos todo a sus valores iniciales
 		CirculoMover = null;
 		iCirculo = -1;
 		
@@ -112,7 +121,6 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 			this.vectorCirculos.set(iCirculo, new Circulo( e.getX(), e.getY(), CirculoMover.getNombreCirculo(), CirculoMover.idInsumo ));
 			int iE = 0;
 			for(Flecha Flecha : vectorFlechas){
-				
 				if(new Rectangle(Flecha.getX1() - Circulo.d/2, Flecha.getY1() - Circulo.d/2, Circulo.d, Circulo.d ).contains(e.getPoint())) {
 					this.vectorFlechas.set(iE, new Flecha(e.getX(), e.getY(), Flecha.getX2(), Flecha.getY2(), Flecha.distancia, Flecha.duracion, Flecha.peso, Flecha.valorGuia));
 				}

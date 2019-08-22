@@ -4,7 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class PanelPlantaAuxModificar extends JPanel {
 	private JTextField textField;
@@ -17,6 +23,7 @@ public class PanelPlantaAuxModificar extends JPanel {
 	 */
 	public PanelPlantaAuxModificar() {
 		setLayout(null);
+		setSize(770, 540);
 		
 		JLabel label = new JLabel("Nombre: ");
 		label.setBounds(21, 14, 46, 14);
@@ -78,7 +85,22 @@ public class PanelPlantaAuxModificar extends JPanel {
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(396, 279, 89, 23);
 		add(btnBorrar);
+		
+		JLabel lblModificarPlanta = new JLabel("Modificar Planta");
+		lblModificarPlanta.setForeground(Color.BLUE);
+		lblModificarPlanta.setBounds(670, 515, 100, 15);
+		add(lblModificarPlanta);
 
+	}
+	
+	
+	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
 	}
 
 }

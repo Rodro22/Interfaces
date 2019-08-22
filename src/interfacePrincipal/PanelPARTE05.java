@@ -20,10 +20,14 @@ import modelo.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PanelPARTE05 extends JPanel {
 	private JTable table;
@@ -52,6 +56,7 @@ public class PanelPARTE05 extends JPanel {
 	 */
 	public PanelPARTE05(BaseDeDatos unaBD) {
 		setLayout(null);
+		setSize(770, 540);
 		inicializarPlanta(unaBD.listaPlantas);
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
@@ -293,6 +298,11 @@ public class PanelPARTE05 extends JPanel {
 		scrollPaneCamiones.setBounds(10, 335, 650, 110);
 		add(scrollPaneCamiones);	
 		
+		JLabel lblParteN = new JLabel("PARTE N\u00BA 5");
+		lblParteN.setForeground(Color.BLUE);
+		lblParteN.setBounds(670, 515, 100, 15);
+		add(lblParteN);
+		
 
 
 	}
@@ -353,6 +363,16 @@ public class PanelPARTE05 extends JPanel {
 	}
 	
 	
+	
+	
+	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 	

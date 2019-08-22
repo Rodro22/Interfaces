@@ -5,9 +5,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +24,10 @@ import modelo.Camino;
 import modelo.Insumo;
 import modelo.Planta;
 import modelo.Recorrido;
+import modelo.StockInsumo;
+
 import javax.swing.JList;
+import java.awt.Color;
 
 public class PanelPARTE04A extends JPanel {
 	private JTable table;
@@ -35,10 +42,10 @@ public class PanelPARTE04A extends JPanel {
 	 */
 	public PanelPARTE04A(List<Planta> listaPlantas, List<Insumo> listaInsumos, List<Camino> listaCaminos, BaseDeDatos unaBD) {
 		setLayout(null);
+		setSize(770, 540);
+
 		
-		
-		
-		PanelPARTE04AGrafo panelGrafo = new PanelPARTE04AGrafo(listaPlantas, listaCaminos);
+		PanelPARTE04AGrafo panelGrafo = new PanelPARTE04AGrafo(listaPlantas, listaCaminos, listaPlantas, listaPlantas, false);
 		panelGrafo.setTitle("Plantas");
 		panelGrafo.setSize(750, 320);
 		panelGrafo.setLocation(0, 0);
@@ -62,16 +69,77 @@ public class PanelPARTE04A extends JPanel {
 		}
 		
 		JLabel lblListaInsumos = new JLabel("Lista insumos:");
-		lblListaInsumos.setBounds(25, 331, 77, 14);
+		lblListaInsumos.setBounds(25, 331, 99, 14);
 		add(lblListaInsumos);
 		
 		JButton btnMostrar = new JButton("Mostrar");
 		btnMostrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(table.getSelectedRow() != -1) {
+					int idInsumo = (int) modeloAux.getValueAt(table.getSelectedRow(), 0);
+					Magica magica = new Magica();
+					List<Vertice<Planta>> lista_plantasFINAL = magica.filtrarStock2(idInsumo, unaBD.listaStockInsumo, unaBD.grafo.vertices);
+					List<Planta> listaPlantasFaltanteInsumo = new ArrayList<Planta>();
+					Planta guia = new Planta();
+					
+					for(Vertice<Planta> unVertice: lista_plantasFINAL) {
+//						System.out.println(unVertice.valor.getClass());
+						
+						if(unVertice.valor.getClass() == guia.getClass()) {
+							Planta aux = new Planta();
+							aux.setEsAcopio(unVertice.valor.esAcopio);
+							aux.setId(unVertice.valor.idplanta);
+							aux.setNombre(unVertice.valor.nombre_planta);
+							listaPlantasFaltanteInsumo.add(aux);
+						}
+					}
+					
+//						System.out.println("Le falta el insumo a: "+listaPlantasFaltanteInsumo);
+						
+						if(listaPlantasFaltanteInsumo.isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Ninguna planta necesita este insumo", "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
+						}
+					Vertice<Planta> v1aux = unaBD.grafo.vertices.get(0);
+					Vertice<Planta> v2aux = unaBD.grafo.vertices.get(1);
+					Recorrido unRecorrido = magica.mejorRecorrido(magica.filtrarStock2(idInsumo, unaBD.listaStockInsumo, unaBD.grafo.vertices), unaBD.grafo.armarRecorridos(unaBD.grafo.caminos(v1aux, v2aux)));		
+					
+					List<Planta> listaPlantasparaArmarCamino = new ArrayList<Planta>();
+					for(Vertice<Planta> unVertice: unRecorrido.recorrido) {
+//						System.out.println(unVertice.valor.getClass());
+						
+						if(unVertice.valor.getClass() == guia.getClass()) {
+							Planta aux = new Planta();
+							aux.setEsAcopio(unVertice.valor.esAcopio);
+							aux.setId(unVertice.valor.idplanta);
+							aux.setNombre(unVertice.valor.nombre_planta);
+							listaPlantasparaArmarCamino.add(aux);
+						}
+					}
+					
+//					System.out.println(listaPlantasparaArmarCamino);
+					
+					
+					
+					PanelPARTE04AGrafo panelGrafoInsumo = new PanelPARTE04AGrafo(listaPlantas, listaCaminos, listaPlantasparaArmarCamino, listaPlantasFaltanteInsumo, true);
+					panelGrafoInsumo.setTitle("Plantas con faltante de insumo");
+					panelGrafoInsumo.setSize(750, 320);
+					panelGrafoInsumo.setLocation(0, 0);
+					panelGrafoInsumo.setVisible(true);
+					panelGrafo.setVisible(false);
+					add(panelGrafoInsumo);
+					
+					
+				}	
 			}
 		});
 		btnMostrar.setBounds(25, 484, 89, 23);
 		add(btnMostrar);
+		
+		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		
 		JButton btnMejorCamino = new JButton("Mejor Camino");
 		
@@ -95,6 +163,11 @@ public class PanelPARTE04A extends JPanel {
 		});
 		btnMejorCamino.setBounds(129, 484, 124, 23);
 		add(btnMejorCamino);
+		
+		JLabel lblParteN = new JLabel("PARTE N\u00BA 4 \"A\"");
+		lblParteN.setForeground(Color.BLUE);
+		lblParteN.setBounds(670, 515, 100, 15);
+		add(lblParteN);
 		
 
 
@@ -146,7 +219,13 @@ public class PanelPARTE04A extends JPanel {
 		return modeloAux_2;
 	}
 	
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 }

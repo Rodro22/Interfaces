@@ -18,14 +18,19 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
 import javax.swing.JInternalFrame;
 import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PanelPARTE04B extends JPanel {
 
@@ -46,6 +51,7 @@ public class PanelPARTE04B extends JPanel {
 	 */
 	public PanelPARTE04B(List<Planta> listaPlantas) {
 		setLayout(null);
+		setSize(770, 540);
 		
 		inicioFrame(listaPlantas);
 
@@ -140,16 +146,26 @@ public class PanelPARTE04B extends JPanel {
 		JButton btnMostrarRecorridos = new JButton("Mostrar Recorridos");
 		btnMostrarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(unatable.getSelectedRow() != -1) {
 				List<Recorrido> listaRecorridos= obtenerRecorridos(p1,p2); 
 				inicializarRecorridos(listaRecorridos);
 				System.out.println(listaRecorridos);
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+					
+				}
 				
 				
 			}
 		});
-		btnMostrarRecorridos.setBounds(10, 211, 130, 23);
+		btnMostrarRecorridos.setBounds(10, 211, 150, 23);
 		add(btnMostrarRecorridos);
+		
+		JLabel lblParteN = new JLabel("PARTE N\u00BA 4 \"B\"");
+		lblParteN.setForeground(Color.BLUE);
+		lblParteN.setBounds(670, 515, 100, 15);
+		add(lblParteN);
 		
 		internalFrame.setVisible(true);
 				
@@ -220,9 +236,7 @@ public class PanelPARTE04B extends JPanel {
 	
 			Vertice<Planta> v1 = null;
 			Vertice<Planta> v2 = null;
-			
 			BaseDeDatos BD = new BaseDeDatos();	
-			
 			for(Vertice<Planta> unVertice : BD.grafo.vertices) {
 				if(unVertice.valor.idplanta == p1) {
 					v1 = unVertice;
@@ -231,12 +245,24 @@ public class PanelPARTE04B extends JPanel {
 					v2 = unVertice;
 				}
 			}
-			
-				
 			List<Recorrido> rec= new ArrayList<>();
-			
 			rec = BD.grafo.armarRecorridos(BD.grafo.caminos(v1,v2));
 			return rec;
 			
 	}
+	
+	
+	
+	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
+	
+	
+	
+	
 }

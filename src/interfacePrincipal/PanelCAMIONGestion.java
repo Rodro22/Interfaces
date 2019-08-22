@@ -11,11 +11,15 @@ import auxiliar.MiModelo;
 import modelo.Camion;
 import modelo.Insumo;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import java.awt.Color;
 
 public class PanelCAMIONGestion extends JPanel {
 	public List<Camion> listaCamiones_principal;
@@ -35,6 +39,7 @@ public class PanelCAMIONGestion extends JPanel {
 	public PanelCAMIONGestion(List<Camion> listaCamiones) {
 		this.listaCamiones_principal = listaCamiones;
 		setLayout(null);
+		setSize(770, 540);
 		
 		inicializar(listaCamiones);
 		
@@ -177,6 +182,11 @@ public class PanelCAMIONGestion extends JPanel {
 		btnBorrar.setBounds(546, 339, 89, 23);
 		add(btnBorrar);
 		
+		JLabel lblGestionCamiones = new JLabel("Gestion Camiones");
+		lblGestionCamiones.setForeground(Color.BLUE);
+		lblGestionCamiones.setBounds(650, 515, 110, 15);
+		add(lblGestionCamiones);
+		
 //		table = new JTable();
 //		table.setBounds(20, 173, 652, 154);
 //		add(table);
@@ -249,7 +259,13 @@ public class PanelCAMIONGestion extends JPanel {
 		}
 		return modeloAux;
 		}
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 
 	
 	

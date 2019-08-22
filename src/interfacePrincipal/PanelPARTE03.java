@@ -7,13 +7,16 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JDesktopPane;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -44,7 +47,7 @@ public class PanelPARTE03 extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelPARTE03(List<Insumo> listaInsumos, BaseDeDatos unaBD ) {
-		
+		setSize(770, 540);
 		inicializar(listaInsumos);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -92,10 +95,10 @@ public class PanelPARTE03 extends JPanel {
 		lblMostrarPor.setBounds(10, 267, 75, 14);
 		
 		JLabel lblCosto = new JLabel("Costo:");
-		lblCosto.setBounds(20, 292, 46, 14);
+		lblCosto.setBounds(20, 292, 65, 14);
 		
 		JLabel lblStock = new JLabel("Nombre: ");
-		lblStock.setBounds(20, 334, 46, 14);
+		lblStock.setBounds(20, 334, 65, 14);
 		
 		JButton btnMinimo = new JButton("Ascendente");
 		btnMinimo.addActionListener(new ActionListener() {
@@ -160,6 +163,11 @@ public class PanelPARTE03 extends JPanel {
 		add(lblNombre);
 		add(textNombre);
 		add(btnBuscar);
+		
+		JLabel lblParteN = new JLabel("PARTE N\u00BA 03");
+		lblParteN.setForeground(Color.BLUE);
+		lblParteN.setBounds(670, 515, 100, 15);
+		add(lblParteN);
 		
 
 		
@@ -239,7 +247,13 @@ public class PanelPARTE03 extends JPanel {
 		
 		
 		
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 	

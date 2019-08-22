@@ -16,10 +16,15 @@ import modelo.StockInsumo;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 public class PanelInsumoGestion extends JPanel {
 
@@ -39,6 +44,7 @@ public class PanelInsumoGestion extends JPanel {
 	public PanelInsumoGestion(List<Insumo> listaInsumos, List<Planta> listaPlantas, List<StockInsumo> listaStockInsumos) {
 		this.listaInsumos_principal = listaInsumos;
 		setLayout(null);
+		setSize(770, 540);
 ////////////////////////////////////////////////////////////////////////////////////////
 		//ESTO ES LO QUE MUESTRA AL INICIO//
 		//JLabel lblListaDeInsumos = new JLabel("Lista de Insumos:");
@@ -284,6 +290,11 @@ public class PanelInsumoGestion extends JPanel {
 		JLabel lblListaDeInsumos = new JLabel("Lista de Insumos:");
 		lblListaDeInsumos.setBounds(10, 136, 130, 14);
 		add(lblListaDeInsumos);
+		
+		JLabel lblGestionInsumos = new JLabel("Gestion Insumos");
+		lblGestionInsumos.setForeground(Color.BLUE);
+		lblGestionInsumos.setBounds(670, 515, 100, 15);
+		add(lblGestionInsumos);
 
 
 		
@@ -466,7 +477,13 @@ public class PanelInsumoGestion extends JPanel {
 	}
 	
 	
-	
+	public void paintComponent(Graphics g) {
+		Dimension tam = getSize();
+		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
+		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
+		
+		
+	}
 	
 	
 	

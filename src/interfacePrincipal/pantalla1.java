@@ -2,6 +2,7 @@ package interfacePrincipal;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -10,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +32,7 @@ import modelo.Stock;
 import modelo.StockInsumo;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -37,11 +40,12 @@ import javax.swing.JLabel;
 
 
 
-public class pantalla1 {
+public class pantalla1 extends JFrame{
 	
 
 	public JFrame frame;
 	public DefaultTableModel modelo;
+	public final static String unaImagen = "/imagen/8AD.jpg";
 
 
 	public static void main(String[] args) {
@@ -186,6 +190,11 @@ public class pantalla1 {
 				}
 			}
 		});
+	
+
+	
+	
+	
 	}
 
 	public pantalla1(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Camion> listaCamiones, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD ) {
@@ -193,9 +202,30 @@ public class pantalla1 {
 	}
 
 	private void initialize(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Camion> listaCamiones, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD) {
+		
+		
 		frame = new JFrame("Aplicacion DIED 2019");
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		PanelINICIO inicio = new PanelINICIO();
+		frame.add(inicio);
+		
+		frame.getContentPane().setLayout(null);
+		
+//		JLabel lblTp = new JLabel("TP 2019");
+//		lblTp.setBounds(172, 114, 399, 172);
+//		Font auxFont=lblTp.getFont(); 
+//		lblTp.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 100));
+//		frame.getContentPane().add(lblTp);
+//		
+//		JLabel lblDied = new JLabel("DIED");
+//		Font auxFont2=lblTp.getFont();
+//		lblDied.setBounds(280, 297, 193, 98);
+//		lblDied.setFont(new Font(auxFont.getFontName(), auxFont2.getStyle(), 75));
+//		frame.getContentPane().add(lblDied);
+		
+		
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -248,6 +278,7 @@ public class pantalla1 {
 				  frame.setVisible(true);  }			 });
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		JMenu mnInsumos = new JMenu("Insumos");
 		mnOpciones.add(mnInsumos);
 		JMenuItem mntmGestionInsumos = new JMenuItem("Gestion Insumos");
@@ -259,19 +290,7 @@ public class pantalla1 {
 				  frame.setVisible(true);  }			 });
 		
 		
-		frame.getContentPane().setLayout(null);
-		
-		JLabel lblTp = new JLabel("TP 2019");
-		lblTp.setBounds(172, 114, 399, 172);
-		Font auxFont=lblTp.getFont(); 
-		lblTp.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 100));
-		frame.getContentPane().add(lblTp);
-		
-		JLabel lblDied = new JLabel("DIED");
-		Font auxFont2=lblTp.getFont();
-		lblDied.setBounds(280, 297, 193, 98);
-		lblDied.setFont(new Font(auxFont.getFontName(), auxFont2.getStyle(), 75));
-		frame.getContentPane().add(lblDied);
+
 		
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 		
@@ -337,4 +356,7 @@ public class pantalla1 {
 		
 		
 	}
+	
+	
+
 }

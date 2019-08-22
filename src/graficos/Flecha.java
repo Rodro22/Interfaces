@@ -10,6 +10,10 @@ public class Flecha {
 
 	private int x1, y1, x2, y2;
 	private String nombre;
+	public Double distancia;
+	public Double duracion;
+	public Double peso;
+	public int valorGuia;
 
 	public Flecha (int x1, int y1, int x2, int y2) {
 		
@@ -30,8 +34,28 @@ public class Flecha {
 	public Flecha (String nombre) {
 			
 		this.nombre = nombre;
+		
 		}
 	
+	public Flecha(Double a, Double b, Double c, int guia) {
+		this.distancia = a;
+		this.duracion = b;
+		this.peso = c;
+		this.valorGuia = guia;
+	}
+	
+	public Flecha (int x1, int y1, int x2, int y2, Double distanciaAux, Double duracionAux, Double pesoAux, int guiaAux) {
+		
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;		
+		this.distancia = distanciaAux;
+		this.duracion = duracionAux;
+		this.peso = pesoAux;
+		this.valorGuia = guiaAux;
+		
+		}
 	
 //	public void pintar(Graphics g) {
 //		
@@ -57,33 +81,89 @@ public class Flecha {
 ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 		//ESTE METODO ME PONE UNA FLECHA
-	public void pintar(Graphics g) {
+//	public void pintar(Graphics g) {
+//	
+//		((Graphics2D)g).setColor(Color.blue);
+//		((Graphics2D)g).setStroke(new BasicStroke(2));
+//		
+//		g.drawLine(x1, y1, x2, y2);
+//		
+//		
+//		if(x1>x2 && y1>y2) {
+//			g.drawString(nombre, x1 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+//			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+//		
+//		if(x1<x2 && y1<y2) {
+//			g.drawString(nombre, x1 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+//			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+//		
+//		if(x1>x2 && y1<y2) {
+//			g.drawString(nombre, x2 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+//			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+//		
+//		if(x1<x2 && y1>y2) {
+//			g.drawString(nombre, x2 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+//			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+//	
+//	}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	public void pintar(Graphics g) {
+		
 		((Graphics2D)g).setColor(Color.blue);
 		((Graphics2D)g).setStroke(new BasicStroke(2));
-		
+		String cadena = this.distancia+", "+ this.duracion+", " +this.peso;
 		g.drawLine(x1, y1, x2, y2);
 		
 		
 		if(x1>x2 && y1>y2) {
-			g.drawString(nombre, x1 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
-			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+			g.drawString(cadena, x1 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 10);}
 		
 		if(x1<x2 && y1<y2) {
-			g.drawString(nombre, x1 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
-			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+			g.drawString(cadena, x1 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 10);}
 		
 		if(x1>x2 && y1<y2) {
-			g.drawString(nombre, x2 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
-			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+			g.drawString(cadena, x2 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 10);}
 		
 		if(x1<x2 && y1>y2) {
-			g.drawString(nombre, x2 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
-			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 15);}
+			g.drawString(cadena, x2 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.blue, 10);}
 	
 	}
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void pintar2(Graphics g) {
+		
+		((Graphics2D)g).setColor(Color.orange);
+		((Graphics2D)g).setStroke(new BasicStroke(2));
+		String cadena = this.distancia+", "+ this.duracion+", " +this.peso;
+		g.drawLine(x1, y1, x2, y2);
+		
+		
+		if(x1>x2 && y1>y2) {
+			g.drawString(cadena, x1 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.orange, 10);}
+		
+		if(x1<x2 && y1<y2) {
+			g.drawString(cadena, x1 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.orange, 10);}
+		
+		if(x1>x2 && y1<y2) {
+			g.drawString(cadena, x2 - Math.abs((x1 - x2)/2), y2 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.orange, 10);}
+		
+		if(x1<x2 && y1>y2) {
+			g.drawString(cadena, x2 - Math.abs((x1 - x2)/2), y1 - Math.abs((y1 - y2)/2));
+			drawArrowHead((Graphics2D) g, x1, y1, x2, y2, Color.orange, 10);}
+	
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////		
+/////////////////////////////////////////////////////////////////////////////////////////	
 	
 	public String getNombreFlecha() {
 		return nombre;

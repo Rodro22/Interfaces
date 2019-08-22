@@ -1,6 +1,7 @@
 package interfacePrincipal;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -10,6 +11,8 @@ import javax.swing.JInternalFrame;
 import graficos.Circulo;
 import graficos.Flecha;
 import graficos.Lienzo;
+import graficos.LienzoAux;
+import grafo.Vertice;
 import modelo.*;
 
 public class PanelPARTE04AGrafo extends JInternalFrame {
@@ -33,27 +36,40 @@ public class PanelPARTE04AGrafo extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PanelPARTE04AGrafo(List<Planta> listaPlantas, List<Camino> listaCaminos) {
-//		setBounds(100, 100, 500, 600);
-//		
-//		JInternalFrame ventana2 = new JInternalFrame("Dibujo");
-//		ventana2.setSize(600, 600);
-//		ventana2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		ventana2.setVisible(true);
-//		ventana.add(new Lienzo());
-//		ventana.setSize(600, 600);
-//		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		ventana.setVisible(true);
+	public PanelPARTE04AGrafo(List<Planta> listaPlantas, List<Camino> listaCaminos, List<Planta> listaPlantasParaCamino, List<Planta> plantasQueNecesitanInsumo, Boolean control) {
+
 		Vector<Circulo> listaCirculos = new Vector<Circulo>();
-//		List<Circulo> listaCirculos = null;
+		
 		for(Planta auxP : listaPlantas) {
 			Circulo unCirculo = new Circulo(auxP.getNombre());
+			for(Planta auxPF : plantasQueNecesitanInsumo) {
+				if(auxPF.idplanta == auxP.idplanta) {
+					unCirculo.idInsumo = 1;
+				}
+			}
 			listaCirculos.add(unCirculo);
 		}
+		
+		List<Camino> caminosParaMostrar = new ArrayList<Camino>();
+		
+		for(Camino unCamino : listaCaminos){
+			for(int j = 0; j<listaPlantasParaCamino.size()-1; j++) {
+				if(unCamino.getPlanta_init().idplanta == listaPlantasParaCamino.get(j).idplanta) {
+					if(unCamino.getPlanta_end().idplanta == listaPlantasParaCamino.get(j+1).idplanta) {
+						caminosParaMostrar.add(unCamino);
+					}
+				}
+			}
+		}
+//		System.out.println(caminosParaMostrar);
+		
+		
+		
+		
 		listaCirculos.get(0).setX(50);
 		listaCirculos.get(0).setY(160);
 		
-		listaCirculos.get(1).setX(720);
+		listaCirculos.get(1).setX(670);
 		listaCirculos.get(1).setY(160);
 		
 		listaCirculos.get(2).setX(250);
@@ -67,13 +83,34 @@ public class PanelPARTE04AGrafo extends JInternalFrame {
 		
 		listaCirculos.get(5).setX(500);
 		listaCirculos.get(5).setY(160);
+///////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////	
+		
+		
 		
 //		List<Flecha> listaFlechas = null;
+//		Vector<Flecha> listaFlechas = new Vector<Flecha>();
+//		for(Camino auxC : listaCaminos) {
+//			Flecha unaFlecha = new Flecha(String.valueOf(auxC.getId()));
+//			listaFlechas.add(unaFlecha);	
+//		}
+//		
+		
+		
+		
 		Vector<Flecha> listaFlechas = new Vector<Flecha>();
 		for(Camino auxC : listaCaminos) {
-			Flecha unaFlecha = new Flecha(String.valueOf(auxC.getId()));
+			Flecha unaFlecha = new Flecha( auxC.getDistancia(), auxC.getDuracion(), auxC.getPeso_soportado(), 0);
+			for(Camino caminoMostrar : caminosParaMostrar) {
+				if(caminoMostrar.getId() == auxC.getId()) {
+				unaFlecha.valorGuia = 1;	}
+			}
 			listaFlechas.add(unaFlecha);	
 		}
+
+//		System.out.println(listaFlechas);
+		
+		
 		
 		listaFlechas.get(0).setX2(50);
 		listaFlechas.get(0).setY2(160);
@@ -127,44 +164,29 @@ public class PanelPARTE04AGrafo extends JInternalFrame {
 		
 		listaFlechas.get(10).setX2(500);
 		listaFlechas.get(10).setY2(160);
-		listaFlechas.get(10).setX1(720);
+		listaFlechas.get(10).setX1(670);
 		listaFlechas.get(10).setY1(160);
 		
 
 		
+		if(control == false) {
+			add(new Lienzo(listaCirculos, listaFlechas));
+			setVisible(true);
+			} else if (control == true) {
+				add(new LienzoAux(listaCirculos, listaFlechas));
+				setVisible(true);
+			}
 		
-		
-		
-		//Con esto me aparece la venta con cosas ya creadas
-		
-		Circulo n1 = new Circulo(50, 50 , "p1",1);
-		Circulo n2 = new Circulo(150, 150, "p2",2);
-		Circulo n3 = new Circulo(300, 150, "p3",3);
-		Vector<Circulo> lista = new Vector<Circulo>();
-	
-		
-		lista.add(n1);
-		lista.add(n2);
-		lista.add(n3);
-
-		Flecha e1 = new Flecha(50,50,150,150, "peso, distancia, duracion");
-		Flecha e2 = new Flecha(150,150,300,150, "peso, distancia, duracion");
-		Flecha e3 = new Flecha(300,150,50,50, "peso, distancia, duracion");
-		Vector<Flecha> listaE = new Vector<Flecha>();
-		listaE.add(e1);
-		listaE.add(e2);
-		listaE.add(e3);
-		
-
-	
-		add(new Lienzo(listaCirculos, listaFlechas));
-//		ventana.setSize(600, 600);
-////		ventana.setLocationRelativeTo(null);
-//		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-
-
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

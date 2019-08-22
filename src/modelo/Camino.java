@@ -12,6 +12,7 @@ public class Camino {
 	private Planta planta_init;
 	private Planta planta_end;
 	private Camion camion;
+	
 	private Double distancia;
 	private Double duracion;
 	private Double peso_soportado;
