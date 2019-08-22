@@ -464,7 +464,11 @@ public class PanelInsumoGestion extends JPanel {
 			}		} 
 		listaStockInsumos.addAll(listaAux);
 	}
-		
+	
+	
+	
+	
+	
 	
 	
 
