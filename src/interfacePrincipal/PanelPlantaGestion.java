@@ -57,6 +57,8 @@ public class PanelPlantaGestion extends JPanel {
 		JLabel lblListaDePlantas = new JLabel("Lista de plantas:");
 		lblListaDePlantas.setBounds(24, 11, 100, 14);
 		add(lblListaDePlantas);
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
@@ -86,6 +88,9 @@ public class PanelPlantaGestion extends JPanel {
 		btnModificar.setBounds(96, 288, 89, 23);
 		add(btnModificar);
 		
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +103,9 @@ public class PanelPlantaGestion extends JPanel {
 		btnCrear.setBounds(207, 288, 89, 23);
 		add(btnCrear);
 		
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+		
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,19 +116,20 @@ public class PanelPlantaGestion extends JPanel {
 //					for(Planta plantaAux : listaPlantas) {
 //					System.out.println("Inicio: "+listaPlantas);
 //					System.out.println("Inicio: " + unaBD.listaCaminos.size());
-					for(int w=0; w<listaPlantas.size(); w++) {
-						if(listaPlantas.get(w).idplanta == id) {
+					
+					for(int w=0; w<unaBD.listaPlantas.size(); w++) {
+						if(unaBD.listaPlantas.get(w).idplanta == id) {
 
-							int idStock = listaPlantas.get(w).unStock.id_stock;
-							for(int h = 0; h<listaStockInsumos.size(); h++) {
-								if(listaStockInsumos.get(h).stock.id_stock == idStock) {
+							int idStock = unaBD.listaPlantas.get(w).unStock.id_stock;
+							for(int h = 0; h<unaBD.listaStockInsumo.size(); h++) {
+								if(unaBD.listaStockInsumo.get(h).stock.id_stock == idStock) {
 //									System.out.println(listaStockInsumos);
-									listaStockInsumos.remove(h);
+									unaBD.listaStockInsumo.remove(h);
 									h--;
 //									System.out.println(listaStockInsumos);
 								}
 							}
-							listaPlantas.remove(w);
+							unaBD.listaPlantas.remove(w);
 							w--;
 						}
 						for(int x = 0 ; x< unaBD.listaCaminos.size() ; x++) {
@@ -154,7 +163,8 @@ public class PanelPlantaGestion extends JPanel {
 		add(lblGestionPlantas);
 
 	}
-
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 	public void inicializarPlantas(List<Planta> listaPlantas) {
 
 		table = new JTable(mostrarElementosPlantas(listaPlantas));

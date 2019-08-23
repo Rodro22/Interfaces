@@ -212,21 +212,8 @@ public class pantalla1 extends JFrame{
 		PanelINICIO inicio = new PanelINICIO();
 		frame.add(inicio);
 		frame.getContentPane().setLayout(null);
-		
-//		JLabel lblTp = new JLabel("TP 2019");
-//		lblTp.setBounds(172, 114, 399, 172);
-//		Font auxFont=lblTp.getFont(); 
-//		lblTp.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 100));
-//		frame.getContentPane().add(lblTp);
-//		
-//		JLabel lblDied = new JLabel("DIED");
-//		Font auxFont2=lblTp.getFont();
-//		lblDied.setBounds(280, 297, 193, 98);
-//		lblDied.setFont(new Font(auxFont.getFontName(), auxFont2.getStyle(), 75));
-//		frame.getContentPane().add(lblDied);
-		
-		
-		
+				
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -327,7 +314,7 @@ public class pantalla1 extends JFrame{
 
 			
 			public void actionPerformed(ActionEvent e) {
-				PanelPARTE04B panel04B = new PanelPARTE04B(listaPlanta);
+				PanelPARTE04B panel04B = new PanelPARTE04B(listaPlanta, unaBD);
 				frame.setContentPane(panel04B);
 				frame.setVisible(true);
 				}

@@ -42,20 +42,19 @@ public class PanelPARTE04B extends JPanel {
 	public Planta plantaFinal;
 	public int p1, p2;
 	
-	
-	public PanelPARTE04B(List<Planta> listaPlantas) {
+	public PanelPARTE04B(List<Planta> listaPlantas, BaseDeDatos unaBD) {
 		setLayout(null);
 		setSize(770, 540);
 		
-		inicioFrame(listaPlantas);
+		inicioFrame(unaBD.listaPlantas, unaBD);
 
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
-		for (int i = 0; i < listaPlantas.size(); i++) {
+		for (int i = 0; i < unaBD.listaPlantas.size(); i++) {
 		modeloAux.addRow(obj);
-		Planta getC = listaPlantas.get(i);
+		Planta getC = unaBD.listaPlantas.get(i);
 		modeloAux.setValueAt(getC.getId(), i, 0);
 		modeloAux.setValueAt(getC.getNombre_planta(), i, 1);		
 		modeloAux.setValueAt(i, i, 2);
@@ -106,7 +105,7 @@ public class PanelPARTE04B extends JPanel {
 		return modeloAux;
 	}
 	
-	public void inicioFrame(List<Planta> listaPlantas) {
+	public void inicioFrame(List<Planta> listaPlantas, BaseDeDatos unaBD) {
 		
 		JInternalFrame internalFrame = new JInternalFrame("Seleccione planta INICIAL");
 		internalFrame.getContentPane().setLayout(null);
@@ -140,7 +139,7 @@ public class PanelPARTE04B extends JPanel {
 		btnMostrarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(unatable.getSelectedRow() != -1 ) {
-				List<Recorrido> listaRecorridos= obtenerRecorridos(p1,p2); 
+				List<Recorrido> listaRecorridos= obtenerRecorridos(p1, p2, unaBD); 
 				inicializarRecorridos(listaRecorridos);
 				System.out.println(listaRecorridos);
 				} else {
@@ -222,12 +221,12 @@ public class PanelPARTE04B extends JPanel {
 	}
 	
 	
-	public List<Recorrido> obtenerRecorridos(int p1, int p2){
+	public List<Recorrido> obtenerRecorridos(int p1, int p2, BaseDeDatos bdAux){
 	
 			Vertice<Planta> v1 = null;
 			Vertice<Planta> v2 = null;
-			BaseDeDatos BD = new BaseDeDatos();	
-			for(Vertice<Planta> unVertice : BD.grafo.vertices) {
+				
+			for(Vertice<Planta> unVertice : bdAux.grafo.vertices) {
 				if(unVertice.valor.idplanta == p1) {
 					v1 = unVertice;
 				}
@@ -236,7 +235,7 @@ public class PanelPARTE04B extends JPanel {
 				}
 			}
 			List<Recorrido> rec= new ArrayList<>();
-			rec = BD.grafo.armarRecorridos(BD.grafo.caminos(v1,v2));
+			rec = bdAux.grafo.armarRecorridos(bdAux.grafo.caminos(v1,v2));
 			return rec;
 			
 	}
