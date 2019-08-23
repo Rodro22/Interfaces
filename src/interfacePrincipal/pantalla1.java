@@ -45,7 +45,7 @@ public class pantalla1 extends JFrame{
 
 	public JFrame frame;
 	public DefaultTableModel modelo;
-	public final static String unaImagen = "/imagen/8AD.jpg";
+	public static String unaImagen = "/imagen/8AD.jpg";
 
 
 	public static void main(String[] args) {
@@ -207,9 +207,10 @@ public class pantalla1 extends JFrame{
 		frame = new JFrame("Aplicacion DIED 2019");
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		
 		PanelINICIO inicio = new PanelINICIO();
 		frame.add(inicio);
-		
 		frame.getContentPane().setLayout(null);
 		
 //		JLabel lblTp = new JLabel("TP 2019");
@@ -289,9 +290,6 @@ public class pantalla1 extends JFrame{
 				  frame.setContentPane(panelGestion);
 				  frame.setVisible(true);  }			 });
 		
-		
-
-		
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JMenu mnParte03 = new JMenu("Parte 03");
@@ -352,6 +350,42 @@ public class pantalla1 extends JFrame{
 		});
 		mnParte05.add(parte05);
 		
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		JMenu fondo = new JMenu("Fondo");
+		menuBar.add(fondo);
+		
+		JMenuItem fondoTuerca = new JMenuItem("Tuerca");
+		fondoTuerca.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				 unaImagen = "/imagen/8AD.jpg";
+				
+			}
+		});
+		fondo.add(fondoTuerca);
+		
+		JMenuItem fondoInvierno = new JMenuItem("Winter is Commit");
+		fondoInvierno.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				 unaImagen = "/imagen/9C9.jpg";
+				
+				
+			}
+		});
+		fondo.add(fondoInvierno);
+		
+		JMenuItem fondoIlluminati = new JMenuItem("Illuminati");
+		fondoIlluminati.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				 unaImagen = "/imagen/472.jpg";
+				
+				
+			}
+		});
+		fondo.add(fondoIlluminati);
 		
 		
 		
