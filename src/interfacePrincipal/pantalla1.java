@@ -241,7 +241,7 @@ public class pantalla1 extends JFrame{
 		mnPlantas.add(mntmGestionPlantas);
 		mntmGestionPlantas.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				PanelPlantaGestion panel = new PanelPlantaGestion(listaPlanta, frame, listaInsumos, listaStockInsumo);
+				PanelPlantaGestion panel = new PanelPlantaGestion(listaPlanta, frame, listaInsumos, listaStockInsumo, unaBD);
 				  frame.setContentPane(panel);
 				  frame.setVisible(true);  }			 });
 			

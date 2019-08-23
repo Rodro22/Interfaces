@@ -34,28 +34,21 @@ import java.awt.Color;
 
 public class PanelPARTE04B extends JPanel {
 
-	private JTable table;
-	private JTable table2;
+	private JTable table, unatable, unatable_2;
 	public MiModelo modeloAux;
 	private final String[] columnas = {"Id: ", "Nombre: ", "Posicion: "};
 	private final String[] columnasRecorrido = {"Id: ", "Tiempo: ", "Km: ", "Peso Max", "Recorrido: "};
 	public Planta plantaInicial;
 	public Planta plantaFinal;
 	public int p1, p2;
-	private JTable table_1;
 	
 	
-	
-	/**
-	 * Create the panel.
-	 */
 	public PanelPARTE04B(List<Planta> listaPlantas) {
 		setLayout(null);
 		setSize(770, 540);
 		
 		inicioFrame(listaPlantas);
 
-		
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
@@ -114,19 +107,20 @@ public class PanelPARTE04B extends JPanel {
 	}
 	
 	public void inicioFrame(List<Planta> listaPlantas) {
+		
 		JInternalFrame internalFrame = new JInternalFrame("Seleccione planta INICIAL");
 		internalFrame.getContentPane().setLayout(null);
 		JTable unatable = new JTable(mostrarElementos2(listaPlantas));
 		JScrollPane scrollPane = new JScrollPane(unatable);
 		scrollPane.setBounds(0, 0, 680, 130);
-		
 		internalFrame.getContentPane().add(scrollPane);
 		internalFrame.setBounds(0, 0, 700, 200);
 		
 		JButton btnSeleccionar1 = new JButton("Seleccionar 1");
+		
 		btnSeleccionar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(unatable.getSelectedRow() != -1) {
+				if(unatable.getSelectedRow() != -1 ) {
 					int x = (int) modeloAux.getValueAt(unatable.getSelectedRow(), 2);
 					plantaInicial = listaPlantas.get(x);
 					
@@ -139,24 +133,19 @@ public class PanelPARTE04B extends JPanel {
 			}
 		});
 		btnSeleccionar1.setBounds(10, 145, 120, 20);
-		
 		internalFrame.getContentPane().add(btnSeleccionar1);
 		add(internalFrame);
 		
 		JButton btnMostrarRecorridos = new JButton("Mostrar Recorridos");
 		btnMostrarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(unatable.getSelectedRow() != -1) {
+				if(unatable.getSelectedRow() != -1 ) {
 				List<Recorrido> listaRecorridos= obtenerRecorridos(p1,p2); 
 				inicializarRecorridos(listaRecorridos);
 				System.out.println(listaRecorridos);
 				} else {
-					
 					JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
-					
 				}
-				
-				
 			}
 		});
 		btnMostrarRecorridos.setBounds(10, 211, 150, 23);
@@ -166,15 +155,16 @@ public class PanelPARTE04B extends JPanel {
 		lblParteN.setForeground(Color.BLUE);
 		lblParteN.setBounds(670, 515, 100, 15);
 		add(lblParteN);
-		
 		internalFrame.setVisible(true);
 				
 	}
+	
+	
 	public void finalFrame(List<Planta> listaPlantas) {
 		JInternalFrame internalFrame = new JInternalFrame("Seleccione planta FINAL");
 		internalFrame.getContentPane().setLayout(null);
-		JTable unatable = new JTable(mostrarElementos2(listaPlantas));
-		JScrollPane scrollPane = new JScrollPane(unatable);
+		JTable unatable_2 = new JTable(mostrarElementos2(listaPlantas));
+		JScrollPane scrollPane = new JScrollPane(unatable_2);
 		scrollPane.setBounds(0, 0, 680, 130);
 		
 		internalFrame.getContentPane().add(scrollPane);
@@ -183,8 +173,8 @@ public class PanelPARTE04B extends JPanel {
 		JButton btnSeleccionar2 = new JButton("Seleccionar 2");
 		btnSeleccionar2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(unatable.getSelectedRow() != -1) {
-					int x = (int) modeloAux.getValueAt(unatable.getSelectedRow(), 2);
+				if(unatable_2.getSelectedRow() != -1) {
+					int x = (int) modeloAux.getValueAt(unatable_2.getSelectedRow(), 2);
 					plantaFinal = listaPlantas.get(x);
 					JOptionPane.showMessageDialog(null, "Planta seleccionada: "+ listaPlantas.get(x));
 					p2 = listaPlantas.get(x).idplanta;

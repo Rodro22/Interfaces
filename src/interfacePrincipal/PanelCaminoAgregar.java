@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import auxiliar.MiModelo;
 import modelo.Camino;
 import modelo.Insumo;
 import modelo.Planta;
@@ -36,7 +37,7 @@ public class PanelCaminoAgregar extends JPanel {
 	private JTextField textPfinal;
 	private JTable table;
 	private JTable table_1;
-	public DefaultTableModel modeloAux, modeloAux2;
+	public MiModelo modeloAux, modeloAux2;
 	private final String[] columnas = {"Id: ", "Nombre: ", "Acopio: ", "Posicion"};
 	public int x = 0;
 	public int y = 0;
@@ -53,7 +54,7 @@ public class PanelCaminoAgregar extends JPanel {
 		inicializar2(listaPlantas);
 		
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
@@ -65,7 +66,7 @@ public class PanelCaminoAgregar extends JPanel {
 			modeloAux.setValueAt(getC.esAcopio, i, 2);
 			modeloAux.setValueAt(i, i, 3);
 		}
-		modeloAux2 = new DefaultTableModel();
+		modeloAux2 = new MiModelo();
 		modeloAux2.setColumnIdentifiers(columnas);
 		Object obj2[] = null;
 		
@@ -224,7 +225,7 @@ public class PanelCaminoAgregar extends JPanel {
 
 	}
 	public DefaultTableModel mostrarElementos2(List<Planta> listaPlantas) {
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		

@@ -3,10 +3,13 @@ package interfacePrincipal;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import auxiliar.MiModelo;
+import baseDeDatos.BaseDeDatos;
+import modelo.Camino;
 import modelo.Camion;
 import modelo.Insumo;
 import modelo.Planta;
@@ -33,7 +36,7 @@ public class PanelPlantaGestion extends JPanel {
 	private final String[] columnas = {"Id: ", "Nombre: ", "Acopio: ", "Stock", "Posicion: "};
 
 
-	public PanelPlantaGestion(List<Planta> listaPlantas, JFrame frame, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos) {
+	public PanelPlantaGestion(List<Planta> listaPlantas, JFrame frame, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos, BaseDeDatos unaBD) {
 		setLayout(null);
 		setSize(770, 540);
 		inicializarPlantas(listaPlantas);
@@ -58,9 +61,26 @@ public class PanelPlantaGestion extends JPanel {
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPlantaAuxModificar panelPlanta = new PanelPlantaAuxModificar();
-				frame.setContentPane(panelPlanta);
-				frame.setVisible(true);  }
+				
+				if(table.getSelectedRow() != -1 ) {
+					
+					
+	        	 	Integer id =  (Integer) modeloAux.getValueAt(table.getSelectedRow(), 0);
+	        	 	String nombre = (String) modeloAux.getValueAt(table.getSelectedRow(), 1);
+	        	 	Boolean acopio =   (Boolean) modeloAux.getValueAt(table.getSelectedRow(), 2);        	 	    	 	
+					Planta plantaModificar = new Planta(id, nombre, acopio);	
+//					System.out.println(plantaModificar.nombre_planta);
+					
+					JOptionPane.showMessageDialog(null, "Planta a modificar: "+plantaModificar.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
+					
+					PanelPlantaAuxModificar panelPlanta = new PanelPlantaAuxModificar(unaBD, plantaModificar);
+					frame.setContentPane(panelPlanta);
+					frame.setVisible(true);  
+					
+					} else {
+						JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+					}
+					}
 		});
 		
 		btnModificar.setBounds(96, 288, 89, 23);
@@ -69,7 +89,7 @@ public class PanelPlantaGestion extends JPanel {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPlantaAuxAgregar panelPlanta = new PanelPlantaAuxAgregar(listaInsumos, listaStockInsumos, listaPlantas);
+				PanelPlantaAuxAgregar panelPlanta = new PanelPlantaAuxAgregar(listaInsumos, listaStockInsumos, unaBD.listaPlantas);
 				frame.setContentPane(panelPlanta);
 				 frame.setVisible(true);  
 				 }
@@ -83,35 +103,45 @@ public class PanelPlantaGestion extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() != -1) {
 					int id =  (int) modeloAux.getValueAt(table.getSelectedRow(), 0);
-					System.out.println(id);
+					JOptionPane.showMessageDialog(null, "Planta borrada: "+modeloAux.getValueAt(table.getSelectedColumn(), 1), "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
+//					System.out.println(id);
 //					for(Planta plantaAux : listaPlantas) {
-					System.out.println("Inicio: "+listaPlantas);
+//					System.out.println("Inicio: "+listaPlantas);
+//					System.out.println("Inicio: " + unaBD.listaCaminos.size());
 					for(int w=0; w<listaPlantas.size(); w++) {
 						if(listaPlantas.get(w).idplanta == id) {
-							//////////////
-							///
-							/////////////
-							///
+
 							int idStock = listaPlantas.get(w).unStock.id_stock;
 							for(int h = 0; h<listaStockInsumos.size(); h++) {
 								if(listaStockInsumos.get(h).stock.id_stock == idStock) {
-									System.out.println(listaStockInsumos);
+//									System.out.println(listaStockInsumos);
 									listaStockInsumos.remove(h);
 									h--;
-									System.out.println(listaStockInsumos);
+//									System.out.println(listaStockInsumos);
 								}
 							}
 							listaPlantas.remove(w);
 							w--;
 						}
-							/////
-							///
-							/////
-							////////////////
+						for(int x = 0 ; x< unaBD.listaCaminos.size() ; x++) {
+							
+							if(unaBD.listaCaminos.get(x).getPlanta_init().idplanta == id ) {
+								unaBD.listaCaminos.remove(x);
+								x--;
+							}
+							else if (unaBD.listaCaminos.get(x).getPlanta_end().idplanta == id ) {
+								unaBD.listaCaminos.remove(x);
+								x--;
+							}
+							}
 						}
-					System.out.println("Fin: "+listaPlantas);	
-				}}}
-		);
+//					System.out.println("Fin: "+listaPlantas);	
+//					System.out.println("Fin: " + unaBD.listaCaminos.size());
+					inicializarPlantas(unaBD.listaPlantas);
+				
+				
+				} 	
+				}	}	);
 		
 		btnBorrar.setBounds(314, 288, 89, 23);
 		add(btnBorrar);

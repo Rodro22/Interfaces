@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import auxiliar.MiModelo;
 import modelo.Camino;
 import modelo.Camion;
 import modelo.Insumo;
@@ -29,7 +30,7 @@ import java.awt.Color;
 public class PanelCaminoGestion extends JPanel {
 	public List<Camino> listaCaminos_principal;
 	public List<Planta> listaPlantas_principal;
-	public DefaultTableModel modeloAux;
+	public MiModelo modeloAux;
 	private final String[] columnas = {"Id: ", "Duracion: ", "Distancia: ", "Peso: ", "Planta Inicial: ", "Planta Final", "Posicion"};
 	private JTable table_1;
 	private JTextField textField_6;
@@ -51,7 +52,7 @@ public class PanelCaminoGestion extends JPanel {
 		inicializar(listaCaminos);
 		
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
@@ -209,7 +210,7 @@ public class PanelCaminoGestion extends JPanel {
 //		add(btnActualizar);
 	}
 	public DefaultTableModel mostrarElementos2(List<Camino> listaCaminos) {
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
@@ -229,7 +230,7 @@ public class PanelCaminoGestion extends JPanel {
 	
 	public DefaultTableModel modificarElemento2(List<Camino> listaCaminos, int x, Camino aux) {
 		
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 	
 		modeloAux.setColumnIdentifiers(columnas);
 		listaCaminos.add(x, aux);
@@ -260,7 +261,7 @@ public class PanelCaminoGestion extends JPanel {
 		add(scrollPane);
 	}
 	public DefaultTableModel eliminarElemento2(List<Camino> listaCaminos, int x) {
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		listaCaminos.remove(x);
 		Object obj[] = null;
@@ -279,7 +280,7 @@ public class PanelCaminoGestion extends JPanel {
 		return modeloAux;
 	}
 	public DefaultTableModel limpiar(List<Camino> listaCaminos) {
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 
 		Object obj[] = null;

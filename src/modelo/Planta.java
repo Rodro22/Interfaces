@@ -15,6 +15,13 @@ public class Planta {
 	public Boolean tieneStock;
 	public Stock unStock;
 	
+	public Stock getUnStock() {
+		return unStock;
+	}
+
+	public void setUnStock(Stock unStock) {
+		this.unStock = unStock;
+	}
 	public int x, y;
 	public static final int d =60;
 	public Graphics objetoG;

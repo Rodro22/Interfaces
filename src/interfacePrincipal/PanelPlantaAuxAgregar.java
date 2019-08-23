@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
+import auxiliar.MiModelo;
 import modelo.Insumo;
 import modelo.Planta;
 import modelo.StockInsumo;
@@ -37,10 +38,11 @@ public class PanelPlantaAuxAgregar extends JPanel {
 	private JTextField textInicial;
 	private JTable table;
 
-	public DefaultTableModel modeloAux;
+	public MiModelo modeloAux;
 	private final String[] columnas = {"Id: ", "Nombre: ", "Costo: ", "Descripcion: ", "Posicion: "};
 	public Planta plantaAux;
-
+	
+	public Boolean control = false;
 
 	/**
 	 * Create the panel.
@@ -53,7 +55,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		
 		inicializar(listaInsumos);
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
@@ -66,16 +68,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		modeloAux.setValueAt(getC.getDescripcion(), i, 3);
 		modeloAux.setValueAt(i, i, 4);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		JLabel lblNombre = new JLabel("Nombre: ");
 		lblNombre.setBounds(10, 11, 46, 14);
 		add(lblNombre);
@@ -123,14 +116,13 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		        	 	String descripcion = (String) modeloAux.getValueAt(table.getSelectedRow(), 3);        	 	
 		        	 
 		        	 	Insumo unInsumo = new Insumo (id, nombre, descripcion, costo);
+		        	 	
 		        	 	for(Planta p: listaPlantas) {
 		        	 		if(p.idplanta == plantaAux.idplanta) {
 		        	 			p.unStock.lista_insumo.add(unInsumo);
 		        	 			System.out.println("Planta: " + p.nombre_planta + "Insumo: "+ p.unStock.lista_insumo);
 		        	 		}
 		        	 	}
-		        	 	
-		        	 	
 		        	 	int disponible = Integer.parseInt(textInicial.getText());
 		        	 	int max = Integer.parseInt(textMax.getText());
 		        	 	
@@ -138,7 +130,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		        	 	listaStockInsumos.add(stockInsumoAux);
 		        	 	JOptionPane.showMessageDialog(null, "Se agrego el Insumo: "+ unInsumo.getNombre() + " a la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 		        	 	
-		        	 	
+	 	       	 	
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 		        }
@@ -157,14 +149,16 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-					if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
+				if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
 						
 						plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
 						listaPlantas.add(plantaAux);
 		        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 		        	 	System.out.println(listaPlantas);
+		        	 	
+		        	 	
 					}
-			}
+				}
 			});
 	
 		
@@ -201,8 +195,8 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		lblAgregarPlanta.setBounds(670, 515, 100, 15);
 		add(lblAgregarPlanta);
 		setVisible(true);
-
 	}
+	
 	
 	public void inicializar(List<Insumo> listaInsumos) {
 
@@ -213,8 +207,9 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		add(scrollPane);
 		
 	}
+	
 	public DefaultTableModel mostrarElementos2(List<Insumo> listaInsumos) {
-		modeloAux = new DefaultTableModel();
+		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
@@ -230,15 +225,18 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		return modeloAux;
 	}
 	
-	
+
 	
 	public void paintComponent(Graphics g) {
 		Dimension tam = getSize();
 		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
 		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
-		
-		
-	}
+											}
+	
+	
+	
+	
+	
 	
 	
 	
