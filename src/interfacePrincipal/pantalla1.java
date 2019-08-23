@@ -355,11 +355,13 @@ public class pantalla1 extends JFrame{
 		JMenu fondo = new JMenu("Fondo");
 		menuBar.add(fondo);
 		
-		JMenuItem fondoTuerca = new JMenuItem("Tuerca");
+		JMenuItem fondoTuerca = new JMenuItem("Inicio");
 		fondoTuerca.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
 				 unaImagen = "/imagen/8AD.jpg";
+				 PanelINICIO inicio = new PanelINICIO();
+				 frame.setContentPane(inicio);
+				 frame.setVisible(true);
 				
 			}
 		});
@@ -370,6 +372,9 @@ public class pantalla1 extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				
 				 unaImagen = "/imagen/9C9.jpg";
+				 PanelINICIO inicio = new PanelINICIO();
+				 frame.setContentPane(inicio);
+				 frame.setVisible(true);
 				
 				
 			}
@@ -381,6 +386,9 @@ public class pantalla1 extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				
 				 unaImagen = "/imagen/472.jpg";
+				 PanelINICIO inicio = new PanelINICIO();
+				 frame.setContentPane(inicio);
+				 frame.setVisible(true);
 				
 				
 			}

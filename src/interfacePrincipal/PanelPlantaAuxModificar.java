@@ -307,7 +307,7 @@ public class PanelPlantaAuxModificar extends JPanel {
 	
 		
 		JLabel lblInsumosQuePosee = new JLabel("Insumos que posee la planta:");
-		lblInsumosQuePosee.setBounds(20, 345, 176, 14);
+		lblInsumosQuePosee.setBounds(20, 345, 175, 15);
 		add(lblInsumosQuePosee);
 		
 

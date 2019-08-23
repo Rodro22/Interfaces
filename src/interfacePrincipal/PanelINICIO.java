@@ -44,7 +44,7 @@ public class PanelINICIO extends JPanel {
 		Dimension tam = getSize();
 		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
 		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
-		
+
 		
 	}
 }

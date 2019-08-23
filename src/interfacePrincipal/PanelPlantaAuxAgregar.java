@@ -2,6 +2,7 @@ package interfacePrincipal;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -36,9 +37,9 @@ public class PanelPlantaAuxAgregar extends JPanel {
 	private JTextField txtNombre;
 	private JTextField textMax;
 	private JTextField textInicial;
-	private JTable table;
+	private JTable table, table_1;
 
-	public MiModelo modeloAux;
+	public MiModelo modeloAux, modeloAux_1;
 	private final String[] columnas = {"Id: ", "Nombre: ", "Costo: ", "Descripcion: ", "Posicion: "};
 	public Planta plantaAux;
 	
@@ -69,28 +70,28 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		modeloAux.setValueAt(i, i, 4);
 		}
 
-		JLabel lblNombre = new JLabel("Nombre: ");
-		lblNombre.setBounds(10, 11, 46, 14);
+		JLabel lblNombre = new JLabel("Nuevo Nombre: ");
+		lblNombre.setBounds(10, 11, 100, 14);
 		add(lblNombre);
 		
-		JLabel lblId = new JLabel("Id: ");
-		lblId.setBounds(10, 53, 46, 14);
+		JLabel lblId = new JLabel("Nuevo Id: ");
+		lblId.setBounds(10, 53, 100, 14);
 		add(lblId);
 		
-		JLabel lblAcopio = new JLabel("Acopio: ");
-		lblAcopio.setBounds(10, 78, 46, 14);
+		JLabel lblAcopio = new JLabel("Es Acopio?");
+		lblAcopio.setBounds(10, 78, 100, 14);
 		add(lblAcopio);
 		
 		txtId = new JTextField();
 		txtId.setBackground(Color.WHITE);
-		txtId.setBounds(89, 47, 214, 20);
+		txtId.setBounds(128, 47, 175, 20);
 		add(txtId);
 		txtId.setColumns(10);
 		String unId = txtId.getText();
 		
 		txtNombre = new JTextField();
 		txtNombre.setToolTipText("");
-		txtNombre.setBounds(89, 8, 214, 20);
+		txtNombre.setBounds(128, 8, 175, 20);
 		add(txtNombre);
 		txtNombre.setColumns(10);
 		String unNombre = txtNombre.getText();
@@ -102,10 +103,30 @@ public class PanelPlantaAuxAgregar extends JPanel {
 			String unAcopio = "true";
 		}
 		
+//////////////////////////////////////////////////////////////////////////////////////////////////
+		JButton btnCrear = new JButton("CREAR");
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
+						
+						plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
+						listaPlantas.add(plantaAux);
+		        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
+		        	 	System.out.println(listaPlantas);
+		        	 	control = true;
+		        	 	
+					}
+				}
+			});
+	
+		btnCrear.setBounds(368, 24, 89, 23);
+		add(btnCrear);
+////////////////////////////////////////////////////////////////////////////////////////////////////		
 		JButton btnAgregar = new JButton("AGREGAR");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(control) {
 				 if (table.getSelectedRow() != -1) {
 
 		        	 int i = (int) modeloAux.getValueAt(table.getSelectedRow(), 0);
@@ -130,11 +151,24 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		        	 	listaStockInsumos.add(stockInsumoAux);
 		        	 	JOptionPane.showMessageDialog(null, "Se agrego el Insumo: "+ unInsumo.getNombre() + " a la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 		        	 	
+		        	 	
+		        	 	List<Insumo> listaInsumoPlanta = new ArrayList<Insumo>();
+						for(Planta plantaAuxLista : listaPlantas) {
+							if(plantaAuxLista.idplanta == plantaAux.idplanta) {
+								listaInsumoPlanta.addAll(plantaAux.unStock.lista_insumo);
+							}
+						}
+
+						inicializarInsumoAgregado(listaInsumoPlanta);
+		        	 	
+		        	 	
 	 	       	 	
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 		        }
-				
+				} else {
+					JOptionPane.showMessageDialog(null, "Debe crear la planta primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+				}
 				 
 				
 				
@@ -143,30 +177,9 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		btnAgregar.setBounds(385, 307, 89, 23);
 		add(btnAgregar);
 		
+//////////////////////////////////////////////////////////////////////////////////////////////////
+		
 
-		
-		JButton btnCrear = new JButton("CREAR");
-		btnCrear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
-						
-						plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
-						listaPlantas.add(plantaAux);
-		        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
-		        	 	System.out.println(listaPlantas);
-		        	 	
-		        	 	
-					}
-				}
-			});
-	
-		
-		
-		
-		
-		btnCrear.setBounds(368, 24, 89, 23);
-		add(btnCrear);
 		
 		JLabel lblSeleccioneInsumo = new JLabel("Seleccione Insumo:");
 		lblSeleccioneInsumo.setBounds(10, 113, 149, 28);
@@ -194,6 +207,10 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		lblAgregarPlanta.setForeground(Color.BLUE);
 		lblAgregarPlanta.setBounds(670, 515, 100, 15);
 		add(lblAgregarPlanta);
+		
+		JLabel label = new JLabel("Insumos que posee la planta:");
+		label.setBounds(20, 345, 175, 15);
+		add(label);
 		setVisible(true);
 	}
 	
@@ -225,6 +242,32 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		return modeloAux;
 	}
 	
+	public void inicializarInsumoAgregado(List<Insumo> listaInsumos) {
+		table_1 = new JTable(mostrarElementosInsumosPlanta(listaInsumos));
+		JScrollPane scrollPanePlanta = new JScrollPane(table_1);
+		scrollPanePlanta.setBounds(20, 370, 700, 115);
+		add(scrollPanePlanta);
+		}
+	
+	public DefaultTableModel mostrarElementosInsumosPlanta(List<Insumo> listaInsumos) {
+		modeloAux_1 = new MiModelo();
+		modeloAux_1.setColumnIdentifiers(columnas);
+		Object obj[] = null;
+		
+		for (int i = 0; i < listaInsumos.size(); i++) {
+			modeloAux_1.addRow(obj);
+			Insumo getC = listaInsumos.get(i);
+			modeloAux_1.setValueAt(getC.getId(), i, 0);
+			modeloAux_1.setValueAt(getC.getNombre(), i, 1);
+			modeloAux_1.setValueAt(getC.costo, i, 2);
+			modeloAux_1.setValueAt(getC.getDescripcion(), i, 3);
+			modeloAux_1.setValueAt(i, i, 4);
+		}
+		return modeloAux_1;
+	}
+	
+	
+	
 
 	
 	public void paintComponent(Graphics g) {
@@ -232,12 +275,4 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
 		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
 											}
-	
-	
-	
-	
-	
-	
-	
-	
 }

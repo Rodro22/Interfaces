@@ -140,7 +140,9 @@ public class PanelPlantaGestion extends JPanel {
 					inicializarPlantas(unaBD.listaPlantas);
 				
 				
-				} 	
+				} 	else {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+				}
 				}	}	);
 		
 		btnBorrar.setBounds(314, 288, 89, 23);

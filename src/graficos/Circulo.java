@@ -53,7 +53,7 @@ public class Circulo {
 	public void pintar(Graphics g) {
 		g.setColor(Color.green);
 		((Graphics2D) g).setStroke(new BasicStroke(3));
-
+		
 		g.drawOval(this.x - d/2, this.y -d/2, d, d);
 		g.fillOval(this.x - d/2, this.y -d/2, d, d);
 //		Font oldFont = getFont();
