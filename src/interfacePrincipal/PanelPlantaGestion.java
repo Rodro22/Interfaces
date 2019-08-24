@@ -4,31 +4,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import auxiliar.MiModelo;
-import baseDeDatos.BaseDeDatos;
-import modelo.Camino;
-import modelo.Camion;
-import modelo.Insumo;
-import modelo.Planta;
-import modelo.Stock;
-import modelo.StockInsumo;
-
 import javax.swing.JTable;
-
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import auxiliar.MiModelo;
+import baseDeDatos.BaseDeDatos;
+import modelo.*;
 
 public class PanelPlantaGestion extends JPanel {
 	private JTable table;
@@ -39,14 +28,14 @@ public class PanelPlantaGestion extends JPanel {
 	public PanelPlantaGestion(List<Planta> listaPlantas, JFrame frame, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos, BaseDeDatos unaBD) {
 		setLayout(null);
 		setSize(770, 540);
-		inicializarPlantas(listaPlantas);
+		inicializarPlantas(unaBD.listaPlantas);
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
-		for (int i = 0; i < listaPlantas.size(); i++) {
+		for (int i = 0; i < unaBD.listaPlantas.size(); i++) {
 		modeloAux.addRow(obj);
-		Planta getC = listaPlantas.get(i);
+		Planta getC = unaBD.listaPlantas.get(i);
 		modeloAux.setValueAt(getC.getId(), i, 0);
 		modeloAux.setValueAt(getC.getNombre_planta(), i, 1);
 		modeloAux.setValueAt(getC.getEsAcopio(), i, 2);
@@ -57,8 +46,10 @@ public class PanelPlantaGestion extends JPanel {
 		JLabel lblListaDePlantas = new JLabel("Lista de plantas:");
 		lblListaDePlantas.setBounds(24, 11, 100, 14);
 		add(lblListaDePlantas);
-//////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////	BOTON MODIFICAR     //////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
@@ -66,30 +57,26 @@ public class PanelPlantaGestion extends JPanel {
 				
 				if(table.getSelectedRow() != -1 ) {
 					
-					
 	        	 	Integer id =  (Integer) modeloAux.getValueAt(table.getSelectedRow(), 0);
 	        	 	String nombre = (String) modeloAux.getValueAt(table.getSelectedRow(), 1);
 	        	 	Boolean acopio =   (Boolean) modeloAux.getValueAt(table.getSelectedRow(), 2);        	 	    	 	
-					Planta plantaModificar = new Planta(id, nombre, acopio);	
-//					System.out.println(plantaModificar.nombre_planta);
-					
+					Planta plantaModificar = new Planta(id, nombre, acopio);						
 					JOptionPane.showMessageDialog(null, "Planta a modificar: "+plantaModificar.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 					
 					PanelPlantaAuxModificar panelPlanta = new PanelPlantaAuxModificar(unaBD, plantaModificar);
 					frame.setContentPane(panelPlanta);
 					frame.setVisible(true);  
 					
-					} else {
+				} else {
 						JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 					}
-					}
-		});
-		
+					}});
 		btnModificar.setBounds(96, 288, 89, 23);
 		add(btnModificar);
 		
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////	BOTON CREAR     //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -103,8 +90,9 @@ public class PanelPlantaGestion extends JPanel {
 		btnCrear.setBounds(207, 288, 89, 23);
 		add(btnCrear);
 		
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////	BOTON BORRAR     /////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
@@ -163,8 +151,11 @@ public class PanelPlantaGestion extends JPanel {
 		add(lblGestionPlantas);
 
 	}
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////	INICIALIZAR TABLAS     ///////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void inicializarPlantas(List<Planta> listaPlantas) {
 
 		table = new JTable(mostrarElementosPlantas(listaPlantas));
@@ -186,8 +177,6 @@ public class PanelPlantaGestion extends JPanel {
 		modeloAux.setValueAt(getC.getNombre_planta(), i, 1);
 		modeloAux.setValueAt(getC.getEsAcopio(), i, 2);
 		modeloAux.setValueAt(getC.unStock.lista_insumo, i, 3);
-		
-		
 		modeloAux.setValueAt(i, i, 4);
 		}
 		return modeloAux;
@@ -198,13 +187,7 @@ public class PanelPlantaGestion extends JPanel {
 		Dimension tam = getSize();
 		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
 		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
-		
-		
 	}
-	
-	
-	
-	
 	
 	
 }
