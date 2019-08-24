@@ -382,6 +382,33 @@ public class pantalla1 extends JFrame{
 		});
 		fondo.add(fondoIlluminati);
 		
+		JMenuItem fondoAbstracto = new JMenuItem("Abstracto");
+		fondoAbstracto.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				 unaImagen = "/imagen/9CB.jpg";
+				 PanelINICIO inicio = new PanelINICIO();
+				 frame.setContentPane(inicio);
+				 frame.setVisible(true);
+				
+				
+			}
+		});
+		fondo.add(fondoAbstracto);
+		
+		JMenuItem fondoPuente = new JMenuItem("Puente");
+		fondoPuente.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				 unaImagen = "/imagen/AndresMC54 (5).jpeg";
+				 PanelINICIO inicio = new PanelINICIO();
+				 frame.setContentPane(inicio);
+				 frame.setVisible(true);
+				
+				
+			}
+		});
+		fondo.add(fondoPuente);
 		
 		
 	}

@@ -17,21 +17,44 @@ public class PanelINICIO extends JPanel {
 	public PanelINICIO() {
 		
 		setLayout(null);
-		setSize(780, 540);
+		setSize(794, 548);
 		
 		JLabel lblTp = new JLabel("TP DIED");
-		lblTp.setForeground(Color.RED);
-		lblTp.setBounds(172, 114, 399, 172);
+		lblTp.setForeground(Color.BLUE);
+		lblTp.setBounds(163, 114, 450, 172);
 		Font auxFont=lblTp.getFont(); 
-		lblTp.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 100));
+		lblTp.setFont(new Font("Times New Roman", Font.BOLD, 100));
 		add(lblTp);
 		
 		JLabel lblDied = new JLabel("2019");
-		lblDied.setForeground(Color.RED);
+		lblDied.setForeground(Color.BLUE);
 		Font auxFont2=lblTp.getFont();
 		lblDied.setBounds(280, 297, 193, 98);
 		lblDied.setFont(new Font(auxFont.getFontName(), auxFont2.getStyle(), 75));
 		add(lblDied);
+		
+		JLabel lblLezcanoRodrigo = new JLabel("Lezcano Rodrigo");
+		lblLezcanoRodrigo.setForeground(Color.BLUE);
+		lblLezcanoRodrigo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		lblLezcanoRodrigo.setBounds(35, 470, 184, 25);
+		add(lblLezcanoRodrigo);
+		
+		JLabel lblMantovaniAlejo = new JLabel("Mantovani Alejo");
+		lblMantovaniAlejo.setForeground(Color.BLUE);
+		lblMantovaniAlejo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		lblMantovaniAlejo.setBounds(35, 495, 184, 25);
+		add(lblMantovaniAlejo);
+		
+		JLabel lblAlumnos = new JLabel("Alumnos:");
+		lblAlumnos.setForeground(Color.BLUE);
+		lblAlumnos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAlumnos.setBounds(10, 434, 100, 25);
+		add(lblAlumnos);
+		
+		JLabel lblPortada = new JLabel("Portada");
+		lblPortada.setForeground(Color.BLUE);
+		lblPortada.setBounds(721, 523, 46, 14);
+		add(lblPortada);
 		
 		
 		

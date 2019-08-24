@@ -187,6 +187,8 @@ public class PanelPARTE04B extends JPanel {
 		add(internalFrame);
 		internalFrame.setVisible(true);
 		
+		
+		
 
 //		inicializarRecorridos(listaRecorridos);
 				
