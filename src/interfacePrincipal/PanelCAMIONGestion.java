@@ -22,7 +22,7 @@ import javax.swing.JTable;
 import java.awt.Color;
 
 public class PanelCAMIONGestion extends JPanel {
-	public List<Camion> listaCamiones_principal;
+	
 	private JTextField textMarca;
 	private JTextField textCapacidad;
 	private JTextField textId;
@@ -33,14 +33,10 @@ public class PanelCAMIONGestion extends JPanel {
 	private JTable table, tableAux;
 	private final String[] columnas = {"Id: ", "Marca: ", "Capacidad: ", "Posicion: "};
 
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelCAMIONGestion(List<Camion> listaCamiones) {
-		this.listaCamiones_principal = listaCamiones;
 		setLayout(null);
 		setSize(770, 540);
-		
 		inicializar(listaCamiones);
 		
 //		modeloAux = new MiModelo();

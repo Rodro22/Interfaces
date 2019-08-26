@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import auxiliar.MiModelo;
 import baseDeDatos.BaseDeDatos;
+import grafo.Arista;
+import grafo.Vertice;
 import modelo.*;
 
 public class PanelPlantaGestion extends JPanel {
@@ -81,7 +83,8 @@ public class PanelPlantaGestion extends JPanel {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelPlantaAuxAgregar panelPlanta = new PanelPlantaAuxAgregar(listaInsumos, listaStockInsumos, unaBD.listaPlantas);
+				PanelPlantaAuxAgregar panelPlanta = new PanelPlantaAuxAgregar(unaBD);
+//				PanelPlantaAuxAgregar panelPlanta = new PanelPlantaAuxAgregar(listaInsumos, listaStockInsumos, unaBD.listaPlantas);
 				frame.setContentPane(panelPlanta);
 				 frame.setVisible(true);  
 				 }
@@ -107,7 +110,7 @@ public class PanelPlantaGestion extends JPanel {
 					
 					for(int w=0; w<unaBD.listaPlantas.size(); w++) {
 						if(unaBD.listaPlantas.get(w).idplanta == id) {
-
+														
 							int idStock = unaBD.listaPlantas.get(w).unStock.id_stock;
 							for(int h = 0; h<unaBD.listaStockInsumo.size(); h++) {
 								if(unaBD.listaStockInsumo.get(h).stock.id_stock == idStock) {
@@ -119,6 +122,7 @@ public class PanelPlantaGestion extends JPanel {
 							}
 							unaBD.listaPlantas.remove(w);
 							w--;
+							
 						}
 						for(int x = 0 ; x< unaBD.listaCaminos.size() ; x++) {
 							
@@ -132,8 +136,8 @@ public class PanelPlantaGestion extends JPanel {
 							}
 							}
 						}
-//					System.out.println("Fin: "+listaPlantas);	
-//					System.out.println("Fin: " + unaBD.listaCaminos.size());
+
+
 					inicializarPlantas(unaBD.listaPlantas);
 				
 				
@@ -181,7 +185,9 @@ public class PanelPlantaGestion extends JPanel {
 		}
 		return modeloAux;
 	}
-	
+	public void eliminar() {
+		
+	}
 	
 	public void paintComponent(Graphics g) {
 		Dimension tam = getSize();

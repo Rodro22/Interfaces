@@ -42,11 +42,11 @@ public class PanelPARTE04B extends JPanel {
 	public Planta plantaFinal;
 	public int p1, p2;
 	
-	public PanelPARTE04B(List<Planta> listaPlantas, BaseDeDatos unaBD) {
+	public PanelPARTE04B(BaseDeDatos unaBD) {
 		setLayout(null);
 		setSize(770, 540);
 		
-		inicioFrame(unaBD.listaPlantas, unaBD);
+		inicioFrame(unaBD);
 
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
@@ -66,25 +66,9 @@ public class PanelPARTE04B extends JPanel {
 
 	}
 	
-	
-//	public void inicializar(List<Planta> listaPlantas) {
-//
-//		table = new JTable(mostrarElementos2(listaPlantas));
-////		table.setBounds(24, 36, 629, 227);
-//		JScrollPane scrollPane = new JScrollPane(table);
-//		scrollPane.setBounds(10, 25, 306, 70);
-//		add(scrollPane);
-//		
-//		table2 = new JTable(mostrarElementos2(listaPlantas));
-////		table.setBounds(24, 36, 629, 227);
-//		JScrollPane scrollPane2 = new JScrollPane(table2);
-//		scrollPane2.setBounds(341, 25, 305, 70);
-//		add(scrollPane2);
-//	}
 	public void inicializar(List<Planta> listaPlantas) {
 
 		table = new JTable(mostrarElementos2(listaPlantas));
-//		table.setBounds(24, 36, 629, 227);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 25, 500, 70);
 		add(scrollPane);
@@ -105,11 +89,11 @@ public class PanelPARTE04B extends JPanel {
 		return modeloAux;
 	}
 	
-	public void inicioFrame(List<Planta> listaPlantas, BaseDeDatos unaBD) {
+	public void inicioFrame(BaseDeDatos unaBD) {
 		
 		JInternalFrame internalFrame = new JInternalFrame("Seleccione planta INICIAL");
 		internalFrame.getContentPane().setLayout(null);
-		JTable unatable = new JTable(mostrarElementos2(listaPlantas));
+		JTable unatable = new JTable(mostrarElementos2(unaBD.listaPlantas));
 		JScrollPane scrollPane = new JScrollPane(unatable);
 		scrollPane.setBounds(0, 0, 680, 130);
 		internalFrame.getContentPane().add(scrollPane);
@@ -121,13 +105,13 @@ public class PanelPARTE04B extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(unatable.getSelectedRow() != -1 ) {
 					int x = (int) modeloAux.getValueAt(unatable.getSelectedRow(), 2);
-					plantaInicial = listaPlantas.get(x);
+					plantaInicial = unaBD.listaPlantas.get(x);
 					
-					JOptionPane.showMessageDialog(null, "Planta seleccionada: "+ listaPlantas.get(x));
-					p1 = listaPlantas.get(x).idplanta;
+					JOptionPane.showMessageDialog(null, "Planta seleccionada: "+ unaBD.listaPlantas.get(x));
+					p1 = unaBD.listaPlantas.get(x).idplanta;
 					}
 				internalFrame.setVisible(false);
-				finalFrame(listaPlantas);
+				finalFrame(unaBD.listaPlantas);
 				System.out.println(plantaInicial);
 			}
 		});
@@ -188,9 +172,6 @@ public class PanelPARTE04B extends JPanel {
 		internalFrame.setVisible(true);
 		
 		
-		
-
-//		inicializarRecorridos(listaRecorridos);
 				
 	}
 	

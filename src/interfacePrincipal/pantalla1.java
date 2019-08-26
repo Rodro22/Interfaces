@@ -183,7 +183,7 @@ public class pantalla1 extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					pantalla1 window = new pantalla1(BD.listaPlantas, BD.listaCaminos, BD.listaCamiones, BD.listaInsumos,BD.listaStockInsumo, BD);
+					pantalla1 window = new pantalla1(BD.listaPlantas, BD.listaCaminos, BD.listaInsumos,BD.listaStockInsumo, BD);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -197,11 +197,11 @@ public class pantalla1 extends JFrame{
 	
 	}
 
-	public pantalla1(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Camion> listaCamiones, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD ) {
-		initialize(listaPlanta, listaCaminos, listaCamiones, listaInsumos, listaStockInsumo, unaBD);
+	public pantalla1(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD ) {
+		initialize(listaPlanta, listaCaminos, listaInsumos, listaStockInsumo, unaBD);
 	}
 
-	private void initialize(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Camion> listaCamiones, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD) {
+	private void initialize(List<Planta> listaPlanta, List<Camino> listaCaminos, List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumo, BaseDeDatos unaBD) {
 		
 		
 		frame = new JFrame("Aplicacion DIED 2019");
@@ -243,7 +243,7 @@ public class pantalla1 extends JFrame{
 		mnCamiones.add(mntmGESTIONCamion);
 		mntmGESTIONCamion.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				PanelCAMIONGestion panelGESTION = new PanelCAMIONGestion(listaCamiones);
+				PanelCAMIONGestion panelGESTION = new PanelCAMIONGestion(unaBD.listaCamiones);
 				  frame.setContentPane(panelGESTION);
 				  frame.setVisible(true);  }			 });
 		
@@ -255,7 +255,7 @@ public class pantalla1 extends JFrame{
 		mnCaminos.add(mntmAgregarCaminos);
 		mntmAgregarCaminos.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				PanelCaminoAgregar panelCaminoAgregar = new PanelCaminoAgregar(listaCaminos, listaPlanta);
+				PanelCaminoAgregar panelCaminoAgregar = new PanelCaminoAgregar(unaBD.listaCaminos, unaBD.listaPlantas);
 				  frame.setContentPane(panelCaminoAgregar);
 				  frame.setVisible(true);  }			 });
 		
@@ -263,7 +263,7 @@ public class pantalla1 extends JFrame{
 		mnCaminos.add(mntmGestionarCaminos);
 		mntmGestionarCaminos.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				  PanelCaminoGestion panelCaminoGestion2 = new PanelCaminoGestion(listaCaminos, listaPlanta);
+				  PanelCaminoGestion panelCaminoGestion2 = new PanelCaminoGestion(unaBD.listaCaminos, unaBD.listaPlantas);
 				  frame.setContentPane(panelCaminoGestion2);
 				  frame.setVisible(true);  }			 });
 		
@@ -275,7 +275,7 @@ public class pantalla1 extends JFrame{
 		mnInsumos.add(mntmGestionInsumos);
 		mntmGestionInsumos.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				PanelInsumoGestion panelGestion = new PanelInsumoGestion(listaInsumos, listaPlanta, listaStockInsumo);
+				PanelInsumoGestion panelGestion = new PanelInsumoGestion(unaBD.listaInsumos, unaBD.listaPlantas, unaBD.listaStockInsumo);
 				  frame.setContentPane(panelGestion);
 				  frame.setVisible(true);  }			 });
 		
@@ -288,7 +288,7 @@ public class pantalla1 extends JFrame{
 
 			
 			public void actionPerformed(ActionEvent e) {
-				PanelPARTE03 panel03 = new PanelPARTE03(listaInsumos, unaBD);
+				PanelPARTE03 panel03 = new PanelPARTE03(unaBD.listaInsumos, unaBD);
 				frame.setContentPane(panel03);
 				frame.setVisible(true);
 				}
@@ -304,7 +304,7 @@ public class pantalla1 extends JFrame{
 
 			
 			public void actionPerformed(ActionEvent e) {
-				PanelPARTE04A panel04A = new PanelPARTE04A(listaPlanta, listaInsumos, listaCaminos, unaBD);
+				PanelPARTE04A panel04A = new PanelPARTE04A(unaBD.listaPlantas, unaBD.listaInsumos, unaBD.listaCaminos, unaBD);
 				frame.setContentPane(panel04A);
 				frame.setVisible(true);
 				}
@@ -316,7 +316,7 @@ public class pantalla1 extends JFrame{
 
 			
 			public void actionPerformed(ActionEvent e) {
-				PanelPARTE04B panel04B = new PanelPARTE04B(listaPlanta, unaBD);
+				PanelPARTE04B panel04B = new PanelPARTE04B(unaBD);
 				frame.setContentPane(panel04B);
 				frame.setVisible(true);
 				}

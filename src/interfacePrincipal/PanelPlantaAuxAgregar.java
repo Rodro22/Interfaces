@@ -10,6 +10,7 @@ import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
 import auxiliar.MiModelo;
+import baseDeDatos.BaseDeDatos;
 import modelo.Insumo;
 import modelo.Planta;
 import modelo.StockInsumo;
@@ -48,21 +49,22 @@ public class PanelPlantaAuxAgregar extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelPlantaAuxAgregar(List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos, List<Planta> listaPlantas) {
+	public PanelPlantaAuxAgregar(BaseDeDatos unaBD) {
+//	public PanelPlantaAuxAgregar(List<Insumo> listaInsumos, List<StockInsumo> listaStockInsumos, List<Planta> listaPlantas) {
 		
 		
 		setLayout(null);
 		setSize(770, 540);
 		
-		inicializar(listaInsumos);
+		inicializar(unaBD.listaInsumos);
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);
 		Object obj[] = null;
 		
-		for (int i = 0; i < listaInsumos.size(); i++) {
+		for (int i = 0; i < unaBD.listaInsumos.size(); i++) {
 		modeloAux.addRow(obj);
-		Insumo getC = listaInsumos.get(i);
+		Insumo getC = unaBD.listaInsumos.get(i);
 		modeloAux.setValueAt(getC.getId(), i, 0);
 		modeloAux.setValueAt(getC.getNombre(), i, 1);
 		modeloAux.setValueAt(getC.getCosto(), i, 2);
@@ -111,9 +113,9 @@ public class PanelPlantaAuxAgregar extends JPanel {
 				if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
 						
 						plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
-						listaPlantas.add(plantaAux);
+						unaBD.listaPlantas.add(plantaAux);
 		        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
-		        	 	System.out.println(listaPlantas);
+		        	 	System.out.println(unaBD.listaPlantas);
 		        	 	control = true;
 		        	 	
 					}
@@ -138,7 +140,7 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		        	 
 		        	 	Insumo unInsumo = new Insumo (id, nombre, descripcion, costo);
 		        	 	
-		        	 	for(Planta p: listaPlantas) {
+		        	 	for(Planta p: unaBD.listaPlantas) {
 		        	 		if(p.idplanta == plantaAux.idplanta) {
 		        	 			p.unStock.lista_insumo.add(unInsumo);
 		        	 			System.out.println("Planta: " + p.nombre_planta + "Insumo: "+ p.unStock.lista_insumo);
@@ -148,12 +150,12 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		        	 	int max = Integer.parseInt(textMax.getText());
 		        	 	
 		        	 	StockInsumo stockInsumoAux = new StockInsumo (unInsumo, plantaAux.unStock, max, disponible);
-		        	 	listaStockInsumos.add(stockInsumoAux);
+		        	 	unaBD.listaStockInsumo.add(stockInsumoAux);
 		        	 	JOptionPane.showMessageDialog(null, "Se agrego el Insumo: "+ unInsumo.getNombre() + " a la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 		        	 	
 		        	 	
 		        	 	List<Insumo> listaInsumoPlanta = new ArrayList<Insumo>();
-						for(Planta plantaAuxLista : listaPlantas) {
+						for(Planta plantaAuxLista : unaBD.listaPlantas) {
 							if(plantaAuxLista.idplanta == plantaAux.idplanta) {
 								listaInsumoPlanta.addAll(plantaAux.unStock.lista_insumo);
 							}
