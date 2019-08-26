@@ -14,6 +14,9 @@ public class Flecha {
 	public Double duracion;
 	public Double peso;
 	public int valorGuia;
+	
+	public int idIni;
+	public int idFin;
 
 	public Flecha (int x1, int y1, int x2, int y2) {
 		
@@ -42,6 +45,14 @@ public class Flecha {
 		this.duracion = b;
 		this.peso = c;
 		this.valorGuia = guia;
+	}
+	public Flecha(Double a, Double b, Double c, int guia, int ini, int fin) {
+		this.distancia = a;
+		this.duracion = b;
+		this.peso = c;
+		this.valorGuia = guia;
+		this.idIni = ini;
+		this.idFin = fin;
 	}
 	
 	public Flecha (int x1, int y1, int x2, int y2, Double distanciaAux, Double duracionAux, Double pesoAux, int guiaAux) {

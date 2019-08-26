@@ -159,12 +159,26 @@ public class PanelCaminoAgregar extends JPanel {
 				
 				if((textId.getText().length() != 0) && (textDuracion.getText().length() != 0) && (textDistancia.getText().length() != 0) && (textPeso.getText().length() != 0)
 						&& (textPinicial.getText().length() != 0) && (textPfinal.getText().length() != 0)) {
-					Planta p1 = null;
-					Planta p2 = null;
+					
+					Planta p1 = new Planta();
+					Planta p2 = new Planta();
+					
 					for(Planta aux : listaPlantas) {
-						if(x == aux.idplanta) { p1 = aux;}
-						if(y == aux.idplanta) { p2 = aux;}
+						if(aux.idplanta == Integer.parseInt(textPinicial.getText())) {
+							p1.idplanta = aux.idplanta;
+							p1.nombre_planta = aux.nombre_planta;
+						}
+						if(aux.idplanta == Integer.parseInt(textPfinal.getText())) {
+							p2.idplanta = aux.idplanta;
+							p2.nombre_planta = aux.nombre_planta;
+						}
+						
 					}
+					
+//					for(Planta aux : listaPlantas) {
+//						if(x == aux.idplanta) { p1 = aux;}
+//						if(y == aux.idplanta) { p2 = aux;}
+//					}
 					
 					Camino unCamino = new Camino(Integer.parseInt(textId.getText()), p1, p2, Double.parseDouble(textDuracion.getText()), Double.parseDouble(textDistancia.getText()), 
 							Double.parseDouble(textPeso.getText()));
@@ -183,7 +197,7 @@ public class PanelCaminoAgregar extends JPanel {
 		add(btnCrear);
 		
 		JLabel lblSeleccionePlantaInicial = new JLabel("Seleccione Planta Inicial:");
-		lblSeleccionePlantaInicial.setBounds(10, 141, 136, 14);
+		lblSeleccionePlantaInicial.setBounds(10, 141, 170, 14);
 		add(lblSeleccionePlantaInicial);
 		
 		JLabel lblSeleccionePlantaFinall = new JLabel("Seleccione Planta Final:");

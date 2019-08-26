@@ -33,6 +33,8 @@ public class BaseDeDatos {
 		Insumo i3 = new Insumo(03, "INSUMO 3", 7.0, "Descripcion", "lts", false);
 		Insumo i4 = new Insumo(04, "INSUMO 4", 1.0, "Descripcion", "kg", true);
 		Insumo i5 = new Insumo(05, "INSUMO 5", 50.0, "Descripcion", "lts", true);
+		Insumo i6 = new Insumo(05, "INSUMO 6", 60.0, "Descripcion", "lts", true);
+		Insumo i7 = new Insumo(05, "INSUMO 7", 80.0, "Descripcion", "kg", true);
 		
 		//Ingresamos los insumos
 		
@@ -42,6 +44,8 @@ public class BaseDeDatos {
 		listaInsumos.add(i3);
 		listaInsumos.add(i4);
 		listaInsumos.add(i5);
+		listaInsumos.add(i6);
+		listaInsumos.add(i7);
 		//--------------------------------------
 		
 		

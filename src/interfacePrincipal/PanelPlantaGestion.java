@@ -5,6 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.JTable;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -43,6 +44,8 @@ public class PanelPlantaGestion extends JPanel {
 		modeloAux.setValueAt(getC.getEsAcopio(), i, 2);
 		modeloAux.setValueAt(getC.unStock.lista_insumo, i, 3);
 		modeloAux.setValueAt(i, i, 4);
+		
+		
 		}
 		
 		JLabel lblListaDePlantas = new JLabel("Lista de plantas:");
@@ -164,6 +167,16 @@ public class PanelPlantaGestion extends JPanel {
 
 		table = new JTable(mostrarElementosPlantas(listaPlantas));
 		table.setBounds(24, 36, 629, 227);
+		
+		TableColumn columna = table.getColumn("Id: ");
+		columna.setMaxWidth(40);
+		TableColumn columna1 = table.getColumn("Nombre: ");
+		columna1.setMaxWidth(100);
+		TableColumn columna2 = table.getColumn("Acopio: ");
+		columna2.setMaxWidth(80);
+		TableColumn columna4 = table.getColumn("Posicion: ");
+		columna4.setMaxWidth(60);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(24, 36, 629, 227);
 		add(scrollPane);

@@ -168,12 +168,9 @@ public class PanelPARTE04A extends JPanel {
 		lblParteN.setForeground(Color.BLUE);
 		lblParteN.setBounds(670, 515, 100, 15);
 		add(lblParteN);
-		
-
-
-		
 
 	}
+	
 	
 	public void inicializar(List<Insumo> listaInsumos) {
 
