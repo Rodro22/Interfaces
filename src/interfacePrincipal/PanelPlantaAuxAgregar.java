@@ -109,17 +109,19 @@ public class PanelPlantaAuxAgregar extends JPanel {
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
-						
-						plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
-						unaBD.listaPlantas.add(plantaAux);
-		        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
-		        	 	System.out.println(unaBD.listaPlantas);
-		        	 	control = true;
-		        	 	
+				if(unaBD.listaPlantas.size() <= 12) {
+					if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
+							plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
+							unaBD.listaPlantas.add(plantaAux);
+			        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
+			        	 	System.out.println(unaBD.listaPlantas);
+			        	 	control = true;
+		        	 }
+				} else {
+					JOptionPane.showMessageDialog(null, "Cantidad maxima de plantas alcanzada, elimine una planta para agregar una nueva", "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
+			
 			});
 	
 		btnCrear.setBounds(368, 24, 89, 23);
