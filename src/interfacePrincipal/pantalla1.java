@@ -49,6 +49,9 @@ public class pantalla1 extends JFrame{
 
 
 	public static void main(String[] args) {
+
+		
+		
 /*		
 ///////////////////////////////////////////////////////////////////////////////////
 		List<Camion> listaCamiones = new ArrayList<Camion>();

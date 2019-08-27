@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import auxiliar.InsumoCant;
 import auxiliar.MiModelo;
 import baseDeDatos.BaseDeDatos;
+import grafo.Arista;
+import grafo.Vertice;
 import modelo.Insumo;
 import modelo.Planta;
 
@@ -180,14 +182,37 @@ public class PanelPlantaAuxModificar extends JPanel {
 				
 
 				if((testId.getText().length() != 0) && (testNombre.getText().length() != 0)) { 
-				
+					
+					int idPlanta = Integer.parseInt(testId.getText());
 					int posicion = obtenerPosicion(unaBD.listaPlantas, unaPlanta);
 					unaBD.listaPlantas.get(posicion).setEsAcopio(rdbAcopio.isSelected());
 					unaBD.listaPlantas.get(posicion).setId(Integer.parseInt(testId.getText()));
 					unaBD.listaPlantas.get(posicion).setNombre(testNombre.getText());
 					
 					Planta plantaNueva = unaBD.listaPlantas.get(posicion);
+					//////////// PARTE DEL GRAFO //////////////////////////
+					Vertice<Planta> unVertice = new Vertice(plantaNueva);
+					System.out.println("Inicio de modificacion de vertices: " +unaBD.grafo.vertices);
+					unaBD.grafo.vertices.remove(posicion);
+					unaBD.grafo.vertices.add(posicion, unVertice);
+					System.out.println("Fin de la modificacion de vertices: "+unaBD.grafo.vertices);
+					System.out.println("---------------");
 					
+					System.out.println("Inicio de la modificacion de aristas" + unaBD.grafo.aristas);
+					for(Arista<Planta> aristaAux : unaBD.grafo.aristas) {
+						if(aristaAux.inicio.valor.idplanta == idPlanta) {
+							aristaAux.inicio.valor.idplanta = plantaNueva.idplanta;
+							aristaAux.inicio.valor.esAcopio = plantaNueva.esAcopio;
+							aristaAux.inicio.valor.nombre_planta = plantaNueva.nombre_planta;
+						} else if(aristaAux.fin.valor.idplanta == idPlanta) {
+							aristaAux.fin.valor.idplanta = plantaNueva.idplanta;
+							aristaAux.fin.valor.esAcopio = plantaNueva.esAcopio;
+							aristaAux.fin.valor.nombre_planta = plantaNueva.nombre_planta;
+						} 
+					}
+					System.out.println("Fin de la modificacion de aristas" + unaBD.grafo.aristas);
+					
+					///////////////////////////////////////////////////
 					control = true;
 					idPlantaModificar = plantaNueva.idplanta;
 							
@@ -196,6 +221,7 @@ public class PanelPlantaAuxModificar extends JPanel {
 						listaInsumoPlanta.add(insumoAux);
 					}
 					inicializarInsumosPlanta(listaInsumoPlanta);
+					JOptionPane.showMessageDialog(null, "Planta modificada", "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
