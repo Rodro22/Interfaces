@@ -52,7 +52,6 @@ public class PanelCaminoAgregar extends JPanel {
 		this.listaPlantas_principal = listaPlantas;
 		
 		inicializar1(listaPlantas);
-		inicializar2(listaPlantas);
 		
 		//ESTO ME PERMITE TRABAJAR CON EL JTABLE
 		modeloAux = new MiModelo();
@@ -136,66 +135,56 @@ public class PanelCaminoAgregar extends JPanel {
 		textPfinal.setBounds(370, 60, 75, 20);
 		add(textPfinal);
 
-		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if((table.getSelectedRow() != -1) && (table_1.getSelectedRow() != -1)) {
-					x =  (int) modeloAux.getValueAt(table.getSelectedRow(), 0);
-					y =  (int) modeloAux2.getValueAt(table_1.getSelectedRow(), 0);
-					JOptionPane.showMessageDialog(null, "Debe completar todos los campos "+ x+ " "+y);
-					textPinicial.setText((String) modeloAux.getValueAt(table.getSelectedRow(), 0));
-					textPfinal.setText((String) modeloAux.getValueAt(table_1.getSelectedRow(), 0));
-			}}
-		});
-		
-		btnAgregar.setBounds(505, 366, 89, 23);
-		add(btnAgregar);
-
 		
 		
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				if(Integer.parseInt(textPinicial.getText()) != Integer.parseInt(textPfinal.getText()) ){
+					
 				
-				if((textId.getText().length() != 0) && (textDuracion.getText().length() != 0) && (textDistancia.getText().length() != 0) && (textPeso.getText().length() != 0)
-						&& (textPinicial.getText().length() != 0) && (textPfinal.getText().length() != 0)) {
-					
-					Planta p1 = new Planta();
-					Planta p2 = new Planta();
-					
-					for(Planta aux : listaPlantas) {
-						if(aux.idplanta == Integer.parseInt(textPinicial.getText())) {
-							p1.idplanta = aux.idplanta;
-							p1.nombre_planta = aux.nombre_planta;
-						}
-						if(aux.idplanta == Integer.parseInt(textPfinal.getText())) {
-							p2.idplanta = aux.idplanta;
-							p2.nombre_planta = aux.nombre_planta;
+					if((textId.getText().length() != 0) && (textDuracion.getText().length() != 0) && (textDistancia.getText().length() != 0) && (textPeso.getText().length() != 0)
+							&& (textPinicial.getText().length() != 0) && (textPfinal.getText().length() != 0)) {
+						
+						Planta p1 = new Planta();
+						Planta p2 = new Planta();
+						
+						for(Planta aux : listaPlantas) {
+							if(aux.idplanta == Integer.parseInt(textPinicial.getText())) {
+								p1.idplanta = aux.idplanta;
+								p1.nombre_planta = aux.nombre_planta;
+							}
+							if(aux.idplanta == Integer.parseInt(textPfinal.getText())) {
+								p2.idplanta = aux.idplanta;
+								p2.nombre_planta = aux.nombre_planta;
+							}
+							
 						}
 						
-					}
-					
-//					for(Planta aux : listaPlantas) {
-//						if(x == aux.idplanta) { p1 = aux;}
-//						if(y == aux.idplanta) { p2 = aux;}
-//					}
-					
-					Camino unCamino = new Camino(Integer.parseInt(textId.getText()), p1, p2, Double.parseDouble(textDuracion.getText()), Double.parseDouble(textDistancia.getText()), 
-							Double.parseDouble(textPeso.getText()));
-					listaCaminos.add(unCamino);
-					
-					System.out.println("Lista de aristas al inicio: "+ unaBD.grafo.aristas);
-					Vertice<Planta> v1 = new Vertice(p1);
-					Vertice<Planta> v2 = new Vertice(p2);
-					unaBD.grafo.conectarFull(v1, v2, Integer.parseInt(textId.getText()), Double.parseDouble(textDistancia.getText()), Double.parseDouble(textDuracion.getText()), Double.parseDouble(textPeso.getText()));
-					System.out.println("Lista de aristas al final: "+ unaBD.grafo.aristas);
-					
-					
-					if (listaCaminos.contains(unCamino)) {
-						JOptionPane.showMessageDialog(null, "Elemento agregado correctamente", "Acción del sistema", JOptionPane.INFORMATION_MESSAGE);}	
-					}	else {
-					JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);	}
+	//					for(Planta aux : listaPlantas) {
+	//						if(x == aux.idplanta) { p1 = aux;}
+	//						if(y == aux.idplanta) { p2 = aux;}
+	//					}
+						
+						Camino unCamino = new Camino(Integer.parseInt(textId.getText()), p1, p2, Double.parseDouble(textDuracion.getText()), Double.parseDouble(textDistancia.getText()), 
+								Double.parseDouble(textPeso.getText()));
+						listaCaminos.add(unCamino);
+						
+						System.out.println("Lista de aristas al inicio: "+ unaBD.grafo.aristas);
+						Vertice<Planta> v1 = new Vertice(p1);
+						Vertice<Planta> v2 = new Vertice(p2);
+						unaBD.grafo.conectarFull(v1, v2, Integer.parseInt(textId.getText()), Double.parseDouble(textDistancia.getText()), Double.parseDouble(textDuracion.getText()), Double.parseDouble(textPeso.getText()));
+						System.out.println("Lista de aristas al final: "+ unaBD.grafo.aristas);
+						
+						
+						if (listaCaminos.contains(unCamino)) {
+							JOptionPane.showMessageDialog(null, "Elemento agregado correctamente", "Acción del sistema", JOptionPane.INFORMATION_MESSAGE);}	
+						}	else {
+						JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);	}
+					} else {
+					JOptionPane.showMessageDialog(null, "La planta inicial y final no pueden ser iguales", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+				}
 
 
 			
@@ -204,21 +193,13 @@ public class PanelCaminoAgregar extends JPanel {
 		btnCrear.setBounds(505, 96, 89, 23);
 		add(btnCrear);
 		
-		JLabel lblSeleccionePlantaInicial = new JLabel("Seleccione Planta Inicial:");
+		JLabel lblSeleccionePlantaInicial = new JLabel("Lista de plantas: ");
 		lblSeleccionePlantaInicial.setBounds(10, 141, 170, 14);
 		add(lblSeleccionePlantaInicial);
-		
-		JLabel lblSeleccionePlantaFinall = new JLabel("Seleccione Planta Final:");
-		lblSeleccionePlantaFinall.setBounds(10, 258, 136, 14);
-		add(lblSeleccionePlantaFinall);
 		
 		table = new JTable();
 		table.setBounds(32, 166, 640, 81);
 		add(table);
-		
-		table_1 = new JTable();
-		table_1.setBounds(32, 280, 640, 81);
-		add(table_1);
 		
 		JLabel lblAgregarCamino = new JLabel("Agregar Camino");
 		lblAgregarCamino.setForeground(Color.BLUE);
@@ -232,20 +213,13 @@ public class PanelCaminoAgregar extends JPanel {
 	
 	public void inicializar1(List<Planta> listaPlantas) {
 		table = new JTable(mostrarElementos2(listaPlantas));
-		table.setBounds(10, 183, 680, 172);
+//		table.setBounds(10, 183, 680, 172);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(32, 166, 640, 81);
+		scrollPane.setBounds(30, 165, 640, 300);
 		add(scrollPane);
 
 	}
-	public void inicializar2(List<Planta> listaPlantas) {
-		table_1 = new JTable(mostrarElementos2(listaPlantas));
-		table_1.setBounds(10, 183, 680, 172);
-		JScrollPane scrollPane = new JScrollPane(table_1);
-		scrollPane.setBounds(32, 280, 640, 81);
-		add(scrollPane);
 
-	}
 	public DefaultTableModel mostrarElementos2(List<Planta> listaPlantas) {
 		modeloAux = new MiModelo();
 		modeloAux.setColumnIdentifiers(columnas);

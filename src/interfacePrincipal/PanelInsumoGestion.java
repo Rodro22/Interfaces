@@ -25,6 +25,7 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Font;
 
 public class PanelInsumoGestion extends JPanel {
 
@@ -72,40 +73,40 @@ public class PanelInsumoGestion extends JPanel {
 		}
 
 		JLabel lblId = new JLabel("Id:");
-		lblId.setBounds(10, 11, 46, 14);
+		lblId.setBounds(10, 47, 46, 14);
 		add(lblId);
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 36, 65, 14);
+		lblNombre.setBounds(10, 72, 65, 14);
 		add(lblNombre);
 		JLabel lblDescripcion = new JLabel("Descripcion:");
-		lblDescripcion.setBounds(10, 60, 90, 14);
+		lblDescripcion.setBounds(10, 96, 90, 14);
 		add(lblDescripcion);
 		JLabel lblPrecio = new JLabel("Costo:");
-		lblPrecio.setBounds(10, 85, 46, 14);
+		lblPrecio.setBounds(10, 121, 46, 14);
 		add(lblPrecio);
 
 		txtId = new JTextField();
-		txtId.setBounds(110, 11, 130, 20);
+		txtId.setBounds(110, 47, 130, 20);
 		add(txtId);
 		txtId.setColumns(10);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(110, 36, 130, 20);
+		txtNombre.setBounds(110, 72, 130, 20);
 		add(txtNombre);
 		txtNombre.setColumns(10);
 
 		txtDescripcion = new JTextField();
-		txtDescripcion.setBounds(110, 60, 130, 20);
+		txtDescripcion.setBounds(110, 96, 130, 20);
 		add(txtDescripcion);
 		txtDescripcion.setColumns(10);
 
 		txtPrecio = new JTextField();
-		txtPrecio.setBounds(110, 85, 130, 20);
+		txtPrecio.setBounds(110, 121, 130, 20);
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
 /////////////////////////////////////////////////////////////////////////////
 		JButton btnCrear = new JButton("Crear");
-		btnCrear.setBounds(250, 56, 89, 23);
+		btnCrear.setBounds(250, 92, 89, 23);
 		add(btnCrear);
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -142,8 +143,9 @@ public class PanelInsumoGestion extends JPanel {
 //				
 //			}
 //		});
-		JButton btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(311, 132, 89, 23);
+		JButton btnBorrar = new JButton("Borrar Insumo");
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBorrar.setBounds(530, 360, 130, 25);
 		add(btnBorrar);
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,43 +214,43 @@ public class PanelInsumoGestion extends JPanel {
 //		});
 		
 		JLabel label = new JLabel("Costo: ");
-		label.setBounds(349, 85, 46, 14);
+		label.setBounds(381, 121, 46, 14);
 		add(label);
 		
 		JLabel label_1 = new JLabel("Descripcion: ");
-		label_1.setBounds(349, 60, 76, 14);
+		label_1.setBounds(381, 96, 76, 14);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("Nombre: ");
-		label_2.setBounds(349, 36, 65, 14);
+		label_2.setBounds(381, 72, 65, 14);
 		add(label_2);
 		
 		JLabel label_3 = new JLabel("Id: ");
-		label_3.setBounds(349, 11, 46, 14);
+		label_3.setBounds(381, 47, 46, 14);
 		add(label_3);
 		
 		textIdModificar = new JTextField();
 		textIdModificar.setColumns(10);
-		textIdModificar.setBounds(435, 11, 130, 20);
+		textIdModificar.setBounds(467, 47, 130, 20);
 		add(textIdModificar);
 		
 		textNombreModificar = new JTextField();
 		textNombreModificar.setColumns(10);
-		textNombreModificar.setBounds(435, 36, 130, 20);
+		textNombreModificar.setBounds(467, 72, 130, 20);
 		add(textNombreModificar);
 		
 		textDescripcionModificar = new JTextField();
 		textDescripcionModificar.setColumns(10);
-		textDescripcionModificar.setBounds(435, 60, 130, 20);
+		textDescripcionModificar.setBounds(467, 96, 130, 20);
 		add(textDescripcionModificar);
 		
 		textPrecioModificar = new JTextField();
 		textPrecioModificar.setColumns(10);
-		textPrecioModificar.setBounds(435, 85, 130, 20);
+		textPrecioModificar.setBounds(467, 121, 130, 20);
 		add(textPrecioModificar);
 		
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(588, 56, 89, 23);
+		btnModificar.setBounds(620, 92, 89, 23);
 		add(btnModificar);
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -288,13 +290,23 @@ public class PanelInsumoGestion extends JPanel {
 			}
 		});
 		JLabel lblListaDeInsumos = new JLabel("Lista de Insumos:");
-		lblListaDeInsumos.setBounds(10, 136, 130, 14);
+		lblListaDeInsumos.setBounds(10, 166, 130, 14);
 		add(lblListaDeInsumos);
 		
 		JLabel lblGestionInsumos = new JLabel("Gestion Insumos");
 		lblGestionInsumos.setForeground(Color.BLUE);
 		lblGestionInsumos.setBounds(670, 515, 100, 15);
 		add(lblGestionInsumos);
+		
+		JLabel lblCrearInsumo = new JLabel("Crear Insumo");
+		lblCrearInsumo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblCrearInsumo.setBounds(75, 10, 130, 20);
+		add(lblCrearInsumo);
+		
+		JLabel lblModificarInsumo = new JLabel("Modificar Insumo");
+		lblModificarInsumo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblModificarInsumo.setBounds(410, 10, 145, 20);
+		add(lblModificarInsumo);
 
 
 		
@@ -306,7 +318,7 @@ public class PanelInsumoGestion extends JPanel {
 		table_1 = new JTable(mostrarElementos2(listaInsumos));
 //		table_1.setBounds(40, 171, 595, 150);
 		JScrollPane scrollPane = new JScrollPane(table_1);
-		scrollPane.setBounds(40, 171, 595, 150);
+		scrollPane.setBounds(40, 200, 620, 150);
 		add(scrollPane);
 		
 	}
@@ -484,9 +496,4 @@ public class PanelInsumoGestion extends JPanel {
 		
 		
 	}
-	
-	
-	
-	
-
 }

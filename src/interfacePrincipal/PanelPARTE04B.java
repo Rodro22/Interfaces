@@ -43,6 +43,8 @@ public class PanelPARTE04B extends JPanel {
 	public Planta plantaInicial;
 	public Planta plantaFinal;
 	public int p1, p2;
+	Boolean control1 = false;
+	Boolean control2 = false;
 	
 	public PanelPARTE04B(BaseDeDatos unaBD) {
 		setLayout(null);
@@ -111,7 +113,8 @@ public class PanelPARTE04B extends JPanel {
 					
 					JOptionPane.showMessageDialog(null, "Planta seleccionada: "+ unaBD.listaPlantas.get(x));
 					p1 = unaBD.listaPlantas.get(x).idplanta;
-					}
+					control1 = true;
+				}
 				internalFrame.setVisible(false);
 				finalFrame(unaBD.listaPlantas);
 				System.out.println(plantaInicial);
@@ -124,7 +127,7 @@ public class PanelPARTE04B extends JPanel {
 		JButton btnMostrarRecorridos = new JButton("Mostrar Recorridos");
 		btnMostrarRecorridos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(unatable.getSelectedRow() != -1 ) {
+				if(control1 && control2 ) {
 				List<Recorrido> listaRecorridos= obtenerRecorridos(p1, p2, unaBD); 
 				
 				for(Recorrido auxR : listaRecorridos) {
@@ -135,7 +138,7 @@ public class PanelPARTE04B extends JPanel {
 				inicializarRecorridos(listaRecorridos);
 				System.out.println(listaRecorridos);
 				} else {
-					JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Debe seleccionar ambas opciones primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -169,6 +172,7 @@ public class PanelPARTE04B extends JPanel {
 					plantaFinal = listaPlantas.get(x);
 					JOptionPane.showMessageDialog(null, "Planta seleccionada: "+ listaPlantas.get(x));
 					p2 = listaPlantas.get(x).idplanta;
+					control2 = true;
 					}
 				System.out.println(plantaFinal);
 			}

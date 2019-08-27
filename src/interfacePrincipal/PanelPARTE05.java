@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableColumn;
 
 import auxiliar.*;
 import auxiliar.InsumoCant;
@@ -49,6 +49,7 @@ public class PanelPARTE05 extends JPanel {
 	private JTable table_4;
 	private JTable tableFlujoMax;
 	private JTable table_5;
+	Boolean control = true;
 	
 	
 	public PanelPARTE05(BaseDeDatos unaBD) {
@@ -192,8 +193,12 @@ public class PanelPARTE05 extends JPanel {
 							//idAux: es el id de la planta seleccionada
 							List<InsumoCant> listaInsumoCant = aux.insumocant;	
 									inicializarInsumoCant(listaInsumoCant);
-									break;
-						}}
+									control = true;
+									break;				}
+												}
+//					if(!control) {
+//						JOptionPane.showMessageDialog(null, "La planta seleccionada no posee insumos faltantes", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+//					}
 					} else {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 						}
@@ -240,6 +245,7 @@ public class PanelPARTE05 extends JPanel {
 	}
 	
 	public void inicializarInsumoCant(List<InsumoCant> listaInsumoCant){
+
 		table_1 = new JTable(mostrarElementosInsumoCant(listaInsumoCant));
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		scrollPane_1.setBounds(230, 155, 500, 110);
@@ -268,7 +274,7 @@ public class PanelPARTE05 extends JPanel {
 	public void inicializarPR(List<Planta> listaPlantasPR) {
 		table_2 = new JTable(mostrarElementosPR(listaPlantasPR));
 		JScrollPane scrollPane = new JScrollPane(table_2);
-		scrollPane.setBounds(10, 59, 680, 71);
+		scrollPane.setBounds(10, 60, 720, 70);
 		add(scrollPane);
 	}
 	
@@ -292,7 +298,7 @@ public class PanelPARTE05 extends JPanel {
 
 		table_3 = new JTable(mostrarElementosCamiones(listaCamiones));
 		JScrollPane scrollPaneCamiones = new JScrollPane(table_3);
-		scrollPaneCamiones.setBounds(10, 335, 650, 110);
+		scrollPaneCamiones.setBounds(10, 335, 720, 110);
 		add(scrollPaneCamiones);	
 		
 		JLabel lblParteN = new JLabel("PARTE N\u00BA 5");
@@ -320,10 +326,23 @@ public class PanelPARTE05 extends JPanel {
 		return modeloAux_3;
 	}
 
+	
 	public void inicializarRecorrido(Recorrido rec) {
 		tableFlujoMax = new JTable(mostrarRecorrido(rec));
+		
+		TableColumn columna = tableFlujoMax.getColumn("Id: ");
+		columna.setMaxWidth(30);
+		TableColumn columna1 = tableFlujoMax.getColumn("Duracion: ");
+		columna1.setMaxWidth(60);
+		TableColumn columna2 = tableFlujoMax.getColumn("Distancia: ");
+		columna2.setMaxWidth(60);
+		TableColumn columna3 = tableFlujoMax.getColumn("Capacidad: ");
+		columna3.setMaxWidth(60);
+//		TableColumn columna4 = tableFlujoMax.getColumn("Combinacion: ");
+//		columna4.setMaxWidth(100);
+		
 		JScrollPane unScroll = new JScrollPane(tableFlujoMax);
-		unScroll.setBounds(270, 8, 420, 45);
+		unScroll.setBounds(270, 8, 500, 45);
 		add(unScroll);
 	}
 	public MiModelo mostrarRecorrido(Recorrido unRec) {
