@@ -255,7 +255,7 @@ public class pantalla1 extends JFrame{
 		mnCaminos.add(mntmAgregarCaminos);
 		mntmAgregarCaminos.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent e) {
-				PanelCaminoAgregar panelCaminoAgregar = new PanelCaminoAgregar(unaBD.listaCaminos, unaBD.listaPlantas);
+				PanelCaminoAgregar panelCaminoAgregar = new PanelCaminoAgregar(unaBD.listaCaminos, unaBD.listaPlantas, unaBD);
 				  frame.setContentPane(panelCaminoAgregar);
 				  frame.setVisible(true);  }			 });
 		

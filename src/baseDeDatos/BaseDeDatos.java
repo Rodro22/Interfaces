@@ -33,8 +33,8 @@ public class BaseDeDatos {
 		Insumo i3 = new Insumo(03, "INSUMO 3", 7.0, "Descripcion", "lts", false);
 		Insumo i4 = new Insumo(04, "INSUMO 4", 1.0, "Descripcion", "kg", true);
 		Insumo i5 = new Insumo(05, "INSUMO 5", 50.0, "Descripcion", "lts", true);
-		Insumo i6 = new Insumo(05, "INSUMO 6", 60.0, "Descripcion", "lts", true);
-		Insumo i7 = new Insumo(05, "INSUMO 7", 80.0, "Descripcion", "kg", true);
+		Insumo i6 = new Insumo(06, "INSUMO 6", 60.0, "Descripcion", "lts", true);
+		Insumo i7 = new Insumo(07, "INSUMO 7", 80.0, "Descripcion", "kg", true);
 		
 		//Ingresamos los insumos
 		
@@ -213,14 +213,20 @@ public class BaseDeDatos {
 		
 		Camion c1 = new Camion(01,"Mercedes Benz", 2002, 1000.0);
 		Camion c2 = new Camion(02,"Ford", 2002, 1500.0);
-		Camion c3 = new Camion(03,"Ivecco", 2014, 1800.0);
+		Camion c3 = new Camion(03,"Ivecco", 2014, 1500.0);
 		Camion c4 = new Camion(04,"Mercedes Benz", 2005, 1200.0);
+		Camion c5 = new Camion(05,"Scania", 2015, 900.0);
+		Camion c6 = new Camion(06,"Volvo", 2019, 750.0);
+		Camion c7 = new Camion(07,"Volkswagen", 20010, 500.0);
 		
 		listaCamiones = new ArrayList<Camion>();
 		listaCamiones.add(c1);
 		listaCamiones.add(c2);
 		listaCamiones.add(c3);
 		listaCamiones.add(c4);
+		listaCamiones.add(c5);
+		listaCamiones.add(c6);
+		listaCamiones.add(c7);
 		
 		//-------------------------------------------------------------
 		

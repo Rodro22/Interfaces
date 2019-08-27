@@ -19,17 +19,17 @@ public class PanelINICIO extends JPanel {
 		setLayout(null);
 		setSize(794, 548);
 		
-		JLabel lblTp = new JLabel("TP DIED");
+		JLabel lblTp = new JLabel("  TP DIED");
 		lblTp.setForeground(Color.BLUE);
-		lblTp.setBounds(163, 114, 450, 172);
+		lblTp.setBounds(163, 114, 488, 172);
 		Font auxFont=lblTp.getFont(); 
 		lblTp.setFont(new Font("Times New Roman", Font.BOLD, 100));
 		add(lblTp);
 		
-		JLabel lblDied = new JLabel("2019");
+		JLabel lblDied = new JLabel("  2019");
 		lblDied.setForeground(Color.BLUE);
 		Font auxFont2=lblTp.getFont();
-		lblDied.setBounds(280, 297, 193, 98);
+		lblDied.setBounds(280, 297, 225, 98);
 		lblDied.setFont(new Font(auxFont.getFontName(), auxFont2.getStyle(), 75));
 		add(lblDied);
 		

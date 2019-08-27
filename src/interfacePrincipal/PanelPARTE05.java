@@ -50,10 +50,7 @@ public class PanelPARTE05 extends JPanel {
 	private JTable tableFlujoMax;
 	private JTable table_5;
 	
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelPARTE05(BaseDeDatos unaBD) {
 		setLayout(null);
 		setSize(770, 540);
@@ -196,7 +193,8 @@ public class PanelPARTE05 extends JPanel {
 							List<InsumoCant> listaInsumoCant = aux.insumocant;	
 									inicializarInsumoCant(listaInsumoCant);
 									break;
-						}}} else {
+						}}
+					} else {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
 						}
 				}});
@@ -242,7 +240,6 @@ public class PanelPARTE05 extends JPanel {
 	}
 	
 	public void inicializarInsumoCant(List<InsumoCant> listaInsumoCant){
-		
 		table_1 = new JTable(mostrarElementosInsumoCant(listaInsumoCant));
 		JScrollPane scrollPane_1 = new JScrollPane(table_1);
 		scrollPane_1.setBounds(230, 155, 500, 110);

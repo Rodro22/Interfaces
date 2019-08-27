@@ -139,10 +139,32 @@ public class PanelPlantaGestion extends JPanel {
 							}
 							}
 						}
+					System.out.println(unaBD.grafo.vertices);
+					for(int k = 0 ; k<unaBD.grafo.vertices.size() ; k++) {
+						if(unaBD.grafo.vertices.get(k).valor.idplanta == id) {
+							unaBD.grafo.vertices.remove(k);
+							k--;
+						}
+					}
+					System.out.println(unaBD.grafo.vertices);
 
-
+					System.out.println("----------------------------");
+					System.out.println(unaBD.grafo.aristas);
+					
+					for(int l = 0 ; l<unaBD.grafo.aristas.size() ; l++) {
+						
+						if(unaBD.grafo.aristas.get(l).fin.valor.idplanta == id) {
+							unaBD.grafo.aristas.remove(l);
+							l--;
+						}
+						else if(unaBD.grafo.aristas.get(l).inicio.valor.idplanta == id) {
+							unaBD.grafo.aristas.remove(l);
+							l--;
+						}	
+					}
+					System.out.println(unaBD.grafo.aristas);
+					
 					inicializarPlantas(unaBD.listaPlantas);
-				
 				
 				} 	else {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion primero", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);

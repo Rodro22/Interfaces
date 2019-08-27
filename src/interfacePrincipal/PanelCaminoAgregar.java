@@ -18,9 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import auxiliar.MiModelo;
-import modelo.Camino;
-import modelo.Insumo;
-import modelo.Planta;
+import baseDeDatos.BaseDeDatos;
+import grafo.*;
+import modelo.*;
+
 
 import javax.swing.JList;
 import java.awt.Color;
@@ -43,7 +44,7 @@ public class PanelCaminoAgregar extends JPanel {
 	public int y = 0;
 	
 	
-	public PanelCaminoAgregar(List<Camino> listaCaminos, List<Planta> listaPlantas) {
+	public PanelCaminoAgregar(List<Camino> listaCaminos, List<Planta> listaPlantas, BaseDeDatos unaBD) {
 		this.listaCaminos_principal = listaCaminos;
 		setLayout(null);
 		setSize(770, 540);
@@ -183,6 +184,13 @@ public class PanelCaminoAgregar extends JPanel {
 					Camino unCamino = new Camino(Integer.parseInt(textId.getText()), p1, p2, Double.parseDouble(textDuracion.getText()), Double.parseDouble(textDistancia.getText()), 
 							Double.parseDouble(textPeso.getText()));
 					listaCaminos.add(unCamino);
+					
+					System.out.println("Lista de aristas al inicio: "+ unaBD.grafo.aristas);
+					Vertice<Planta> v1 = new Vertice(p1);
+					Vertice<Planta> v2 = new Vertice(p2);
+					unaBD.grafo.conectarFull(v1, v2, Integer.parseInt(textId.getText()), Double.parseDouble(textDistancia.getText()), Double.parseDouble(textDuracion.getText()), Double.parseDouble(textPeso.getText()));
+					System.out.println("Lista de aristas al final: "+ unaBD.grafo.aristas);
+					
 					
 					if (listaCaminos.contains(unCamino)) {
 						JOptionPane.showMessageDialog(null, "Elemento agregado correctamente", "Acción del sistema", JOptionPane.INFORMATION_MESSAGE);}	

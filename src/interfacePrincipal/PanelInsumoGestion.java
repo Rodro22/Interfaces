@@ -75,7 +75,7 @@ public class PanelInsumoGestion extends JPanel {
 		lblId.setBounds(10, 11, 46, 14);
 		add(lblId);
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 36, 46, 14);
+		lblNombre.setBounds(10, 36, 65, 14);
 		add(lblNombre);
 		JLabel lblDescripcion = new JLabel("Descripcion:");
 		lblDescripcion.setBounds(10, 60, 90, 14);
@@ -220,7 +220,7 @@ public class PanelInsumoGestion extends JPanel {
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("Nombre: ");
-		label_2.setBounds(349, 36, 46, 14);
+		label_2.setBounds(349, 36, 65, 14);
 		add(label_2);
 		
 		JLabel label_3 = new JLabel("Id: ");

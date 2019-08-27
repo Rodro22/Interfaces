@@ -90,7 +90,7 @@ public class PanelCaminoGestion extends JPanel {
 		add(textField_2);
 		
 		JLabel label_1 = new JLabel("Duracion Minutos: ");
-		label_1.setBounds(10, 39, 89, 14);
+		label_1.setBounds(10, 39, 109, 14);
 		add(label_1);
 		
 		JLabel label_2 = new JLabel("Ditancia KM:");

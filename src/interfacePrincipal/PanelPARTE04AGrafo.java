@@ -1,11 +1,14 @@
 package interfacePrincipal;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -15,10 +18,12 @@ import graficos.Lienzo;
 import graficos.LienzoAux;
 import grafo.Vertice;
 import modelo.*;
+import java.awt.Color;
 
 public class PanelPARTE04AGrafo extends JInternalFrame {
 
 	public PanelPARTE04AGrafo(List<Planta> listaPlantas, List<Camino> listaCaminos, List<Planta> listaPlantasParaCamino, List<Planta> plantasQueNecesitanInsumo, Boolean control) {
+		getContentPane().setForeground(Color.WHITE);
 
 		Vector<Circulo> listaCirculos = new Vector<Circulo>();
 		
@@ -242,10 +247,10 @@ public class PanelPARTE04AGrafo extends JInternalFrame {
 
 		
 		if(control == false) {
-			add(new Lienzo(listaCirculos, listaFlechas));
+			getContentPane().add(new Lienzo(listaCirculos, listaFlechas));
 			setVisible(true);
 			} else if (control == true) {
-				add(new LienzoAux(listaCirculos, listaFlechas));
+				getContentPane().add(new LienzoAux(listaCirculos, listaFlechas));
 				setVisible(true);
 			}
 		
@@ -253,7 +258,7 @@ public class PanelPARTE04AGrafo extends JInternalFrame {
 	}
 	
 	
-	
+
 	
 	
 	

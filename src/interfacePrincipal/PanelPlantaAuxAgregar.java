@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import auxiliar.MiModelo;
 import baseDeDatos.BaseDeDatos;
+import grafo.*;
 import modelo.Insumo;
 import modelo.Planta;
 import modelo.StockInsumo;
@@ -113,8 +114,13 @@ public class PanelPlantaAuxAgregar extends JPanel {
 					if((txtId.getText().length() != 0) && (txtNombre.getText().length() != 0) ) {
 							plantaAux = new Planta(Integer.parseInt(txtId.getText()), txtNombre.getText(), rdbAcopio.isSelected());	
 							unaBD.listaPlantas.add(plantaAux);
+							
+							Vertice<Planta> unVertice = new Vertice(plantaAux); 
+							unaBD.grafo.addNodo(unVertice);
+							System.out.println("Lista vertices: "+unaBD.grafo.vertices);
+							
 			        	 	JOptionPane.showMessageDialog(null, "Se agrego la planta " + plantaAux.nombre_planta, "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
-			        	 	System.out.println(unaBD.listaPlantas);
+			        	 	System.out.println("Lista de plantas: "+unaBD.listaPlantas);
 			        	 	control = true;
 		        	 }
 				} else {
