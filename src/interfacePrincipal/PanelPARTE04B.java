@@ -4,9 +4,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import auxiliar.MiModelo;
 import baseDeDatos.BaseDeDatos;
+import grafo.Arista;
 import grafo.Vertice;
 import modelo.Camion;
 import modelo.Planta;
@@ -37,7 +39,7 @@ public class PanelPARTE04B extends JPanel {
 	private JTable table, unatable, unatable_2;
 	public MiModelo modeloAux;
 	private final String[] columnas = {"Id: ", "Nombre: ", "Posicion: "};
-	private final String[] columnasRecorrido = {"Id: ", "Tiempo: ", "Km: ", "Peso Max", "Recorrido: "};
+	private final String[] columnasRecorrido = {"Id: ", "Tiempo: ", "Km: ", "Peso Max: ", "Recorrido: "};
 	public Planta plantaInicial;
 	public Planta plantaFinal;
 	public int p1, p2;
@@ -124,6 +126,12 @@ public class PanelPARTE04B extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(unatable.getSelectedRow() != -1 ) {
 				List<Recorrido> listaRecorridos= obtenerRecorridos(p1, p2, unaBD); 
+				
+				for(Recorrido auxR : listaRecorridos) {
+					Double peso = peso_maximo(auxR, unaBD.grafo.aristas);
+					auxR.pesoSoportado = peso;
+				}
+				
 				inicializarRecorridos(listaRecorridos);
 				System.out.println(listaRecorridos);
 				} else {
@@ -178,8 +186,20 @@ public class PanelPARTE04B extends JPanel {
 	public void inicializarRecorridos(List<Recorrido> listaRecorridos) {
 		
 		table = new JTable(mostrarRecorridos(listaRecorridos));
+		
+		TableColumn columna = table.getColumn("Id: ");
+		columna.setMaxWidth(50);
+		TableColumn columna1 = table.getColumn("Tiempo: ");
+		columna1.setMaxWidth(60);
+		TableColumn columna2 = table.getColumn("Km: ");
+		columna2.setMaxWidth(50);
+		TableColumn columna3 = table.getColumn("Peso Max: ");
+		columna3.setMaxWidth(100);
+//		TableColumn columna4 = table.getColumn("Recorrido: ");
+//		columna4.setMaxWidth(200);
+		
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setBounds(10, 245, 680, 144);
+		scroll.setBounds(10, 245, 680, 250);
 		scroll.setVisible(true);
 		add(scroll);
 			
@@ -223,18 +243,33 @@ public class PanelPARTE04B extends JPanel {
 			
 	}
 	
+		
+	public Double peso_maximo(Recorrido aux, List<Arista<Planta>> lista_aristas) {
+		Double max = 10000000.0;
+		Double pesoAux;
+		for( int j = 0; j < (aux.recorrido.size() - 1) ; j++) {
+			pesoAux = buscarPesoDeAristaEntre(aux.recorrido.get(j), aux.recorrido.get(j+1), lista_aristas);
+			if(pesoAux < max) {
+				max = pesoAux;
+			}
+		}
+		
+		
+		return max;							
+		}
 	
-	
+    public Double buscarPesoDeAristaEntre(Vertice<Planta> v1, Vertice<Planta> v2, List<Arista<Planta>> lista_aristas){
+    	for(Arista unaArista : lista_aristas) {
+    		
+    		if(unaArista.getInicio().equals(v1) && unaArista.getFin().equals(v2)) return unaArista.pesoMax;
+    	}
+    	return 0.0;
+    }
 	
 	public void paintComponent(Graphics g) {
 		Dimension tam = getSize();
 		ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource(pantalla1.unaImagen)).getImage());
 		g.drawImage(imagen.getImage(), 0, 0, tam.width, tam.height, null);
-		
-		
 	}
-	
-	
-	
 	
 }

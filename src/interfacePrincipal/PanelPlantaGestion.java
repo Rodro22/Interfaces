@@ -188,7 +188,7 @@ public class PanelPlantaGestion extends JPanel {
 	public void inicializarPlantas(List<Planta> listaPlantas) {
 
 		table = new JTable(mostrarElementosPlantas(listaPlantas));
-		table.setBounds(24, 36, 629, 227);
+//		table.setBounds(24, 36, 629, 227);
 		
 		TableColumn columna = table.getColumn("Id: ");
 		columna.setMaxWidth(40);
