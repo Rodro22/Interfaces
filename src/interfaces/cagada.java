@@ -14,6 +14,8 @@ public class cagada extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(70, 191, 1, 2);
 		add(separator);
+		
+		
 
 	}
 }
