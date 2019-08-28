@@ -1,6 +1,6 @@
 Parte 03 "GESTION DE INSUMOS"
 El sistema debe permitir buscar insumos, por nombre, por costo minimo y maximo o por stock
-minimo o maximo mostrar la información del insumo y ordenarlos por de manear ascendente o
+minimo o maximo mostrar la informacion del insumo y ordenarlos por de manear ascendente o
 descendente segun elija el usuario por:
 * Stock total en el sistema (es decir la suma de stock que hay de un producto en todas las
 plantas y los centros de acopio)

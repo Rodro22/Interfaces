@@ -1,7 +1,9 @@
 package interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+
+import imagen.DiagramaDeClases;
 
 
 public class Ayuda extends JFrame implements ActionListener{
@@ -86,6 +91,13 @@ public class Ayuda extends JFrame implements ActionListener{
         fr.close();
         pestañas.addTab("Enunciado TP 2019", panel2);
         
+        /////////////////////////////////////////////////////////////////////
+        
+        JPanel panel3=new JPanel();
+//        PanelINICIO unPanel = new PanelINICIO();
+        DiagramaDeClases unPanel = new DiagramaDeClases();
+        pestañas.addTab("Diagrama de clases", unPanel);
+        
         //////////////////////////////////////////////////////////////////////
 
         panelAyuda.add(pestañas);
@@ -112,5 +124,8 @@ public class Ayuda extends JFrame implements ActionListener{
 				
 			}
 		}
+
+
+		
 
 }
