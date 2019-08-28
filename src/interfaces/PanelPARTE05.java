@@ -46,7 +46,6 @@ public class PanelPARTE05 extends JPanel {
 	public final String[] columnas_3 = {"Id: ", "Marca: ", "Linea: ", "Capacidad: "};
 	public final String[] columnas_4 = {"Id: ", "Duracion: ", "Distancia: ", "Capacidad: ", "Combinacion: "};
 	public final String[] columnas_5 = {"Peso: " , "Beneficio: "};
-	private JTable table_4;
 	private JTable tableFlujoMax;
 	private JTable table_5;
 	Boolean control = true;

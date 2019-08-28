@@ -1,4 +1,5 @@
-Esta es una aplicación realizada como trabajo practico final para la materia Diseño e Implementación de Estructura de Datos.
+Esta es una aplicación realizada como trabajo practico final para la materia Diseño e Implementación 
+ de Estructura de Datos.
 
 Podrá navegar a traves de las distintas pantallas e ir consultando las distintas funcionalidades.
 
