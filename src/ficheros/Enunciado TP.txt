@@ -1,0 +1,50 @@
+Parte 03 "GESTION DE INSUMOS"
+El sistema debe permitir buscar insumos, por nombre, por costo minimo y maximo o por stock
+minimo o maximo mostrar la información del insumo y ordenarlos por de manear ascendente o
+descendente segun elija el usuario por:
+* Stock total en el sistema (es decir la suma de stock que hay de un producto en todas las
+plantas y los centros de acopio)
+* Costo
+* Nombre
+Para implementar esta funcionalidad debe utilizar un arbol binario de busqueda (no es necesario
+que este balanceado) y la interface comparable o comparator para cada uno de los criterios.
+Puede utilizar el codigo del taller 03.
+
+Parte 04 "GESTION DE LOGISTICA"
+1. El sistema debe tener una opcion que presente en pantalla un grafo con todas las plantas
+y la informacion de las rutas entre ellos de manera visual (es decir el usuario debe poder
+ver cada planta como una arista y cada camino como una linea que conecta dichas
+aristas).
+a. Por simplicidad puede mostrar un grafo inicial, dejar que el usuario acomode los
+nodos y los caminos con drag and drop o cualquier otra.
+2. El usuario debe poder en la misma pantalla que visualiza el grafo, elegir un insumo de
+una lista desplegable y la interface debe mostrar la siguiente informacion
+a. con un color destacado cuales son las plantas que necesitan dicho insumo porque se encuentra
+ debajo del punto de reposicion.
+b. Cual es el mejor camino para ir desde el acopio del puerto al acopio final,
+pasando por todas las plantas que necesitan el insumo (el camino puede incluir
+plantas que no necesiten el insumo, teniendo en cuenta como mejor camino: la
+distancia o la duracion (sin tener en cuenta la restriccion de peso de las rutas).
+3. Dadas dos plantas cualquieras, una inicial y una final, el usuario debe poder consultar
+todos los caminos entre ellas y mostrarlos por pantalla. Ademas, debe mostrar
+visualmente informacion de cada uno de los caminos (duracion total, distancia total,
+cantidad maxima de peso).
+
+Parte 05 "GESTION DE GENERAL"
+1. El sistema debe poder calcular cual es el flujo maximo que se puede enviar a traves de
+la red, desde el acopio inicial, al acopio final, sin dejar nada en ninguna planta
+intermedia, teniendo en cuenta la capacidad maxima de transporte en kilos que permite
+cada camino.
+2. El sistema debe mostrar tambien una lista ordenada de las plantas, segun el Page Rank
+de las mismas. Esto implica que una planta es mas importante que otra, segun la
+cantidad de caminos que lleguen a ella.
+3. Calcular mejor seleccion de envios. El sistema debe mostrar una lista de todos los insumos faltantes
+ en cada una de las plantas, y la cantidad del mismo.
+b. El sistema debe mostrar todos los camiones disponibles e informacion del camino
+c. El usuario puede seleccionar uno de estos camiones y presionar un boton
+generar solucion. La solucion le va a indicar cual o cuales son los insumos que
+conviene que el camino transporte, sujeto a el peso maximo que puede
+transportar el camion y buscando como objetivo maximizar el valor de los
+insumos transportados (el valor de un insumo transportado se mide a traves de
+su costo). Debe usar programacion dinamica o back tracking para resolver este
+problema.

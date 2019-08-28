@@ -1,0 +1,26 @@
+Esta es una aplicación realizada como trabajo practico final para la materia Diseño e Implementación de Estructura de Datos.
+
+Podrá navegar a traves de las distintas pantallas e ir consultando las distintas funcionalidades.
+
+En el Menu "opciones" encontrará todo lo referente a la gestión de Plantas, Camiones, Caminos e Insumos.
+- Plantas:
+------ Gestion Plantas: podrá agregar, borrar o modificar las plantas.
+- Camiones:
+------ Gestion Camiones: podrá agregar, borrar o modificar Camiones.
+- Caminos:
+------ Agregar Caminos: le permitirá agregar un camino nuevo.
+------ Gestion Caminos: le permitirá modificar o borrar un camino existente.
+- Insumos:
+------ Gestión Insumos: podrá agregar, borrar o modificar los insumos.
+
+En los apartados "Parte03", "Parte04" y "Parte05" encontrará las resoluciones de los correspondientes
+incisos solicitados en el enunciado del tp.
+- Parte03:
+------ Mostrar: Apartado correspondiente al inciso 3 del trabajo practico. 
+- Parte04:
+------ Parte A: Muestra el apartado correspondiente al dibujo del grafo.
+------ Parte B: Muestra el apartado correspondiente a los mejores recorridos entre plantas.
+- Parte05:
+------ Mostrar: Apartado correspondiente al inciso 5 del trabajo practico.
+
+En el apartado "Fondos" podrá seleccionar distintos fondos para la aplicacion según más le convenga.
