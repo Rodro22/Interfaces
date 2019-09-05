@@ -73,8 +73,7 @@ public class PanelPARTE03 extends JPanel {
 					unInsumoAux = new Insumo(Integer.parseInt(textId.getText()), textNombre.getText());
 					}
 					Insumo buscar = buscarInsumo(unInsumoAux, listaInsumos);
-					int condicion = 1;
-					if(condicion == 1) {
+					if(buscar.nombreInsumo.equalsIgnoreCase( (String)textNombre.getText())  ) {
 						inicializarInsumo(buscar);
 					}	else {
 						JOptionPane.showMessageDialog(null, "El insumo no pertenece a la lista", "Accion del sistema", JOptionPane.INFORMATION_MESSAGE);
